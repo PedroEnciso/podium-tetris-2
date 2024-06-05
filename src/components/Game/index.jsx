@@ -89,8 +89,9 @@ const Z = {
 
 const getRandomBloco = () => {
   const blocos = [I, O, T, J, L, S, Z];
-  const bloco = blocos[Math.floor(Math.random() * blocos.length)];
-  bloco.color = colors[Math.floor(Math.random() * colors.length)];
+  const randomNumber = Math.floor(Math.random() * blocos.length);
+  const bloco = blocos[randomNumber];
+  bloco.color = colors[randomNumber];
   return bloco;
 };
 const getRandomPlayer = (player) => {
@@ -121,23 +122,37 @@ const Game = () => {
   const [dragY, setDragY] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [speed, setSpeed] = useState(450);
+  const [keyPresses, setKeyPresses] = useState(0);
 
-  const { gameMode } = useGameMode();
+  const { gameMode, setRandomMode } = useGameMode();
+
+  // increment key press
+  function incrementKeyPress() {
+    setKeyPresses((prev) => prev + 1);
+  }
+  // set key presses to 0
+  function resetKeyPresses() {
+    setKeyPresses(0);
+  }
 
   useEffect(() => {
     const levelBaseScore = 1000;
     const nextLevel = level + 1;
     const nextLevelScore =
       (levelBaseScore * nextLevel * nextLevel * nextLevel) / 5;
-    console.log("Current level: ", level);
-    console.log("Score to next level:", nextLevelScore);
-    console.log("Remaining: ", nextLevelScore - score);
     if (score >= nextLevelScore) setLevel(level + 1);
-    // update the speed if gameMode is random speed
+    // update the speed on score change if gameMode === random speed
     if (gameMode === "random speed") {
       setSpeed(getRandomSpeed());
     }
   }, [level, score]);
+
+  // handle changing the game mode on every level change
+  useEffect(() => {
+    if (level !== 1) {
+      setRandomMode();
+    }
+  }, [level]);
 
   const restartGame = () => {
     setMap(initialMap); //TODO: lose game
@@ -168,19 +183,6 @@ const Game = () => {
         if (!validatePosition(newPlayer.pos, newPlayer.bloco)) loseGame();
         return newPlayer;
       }
-      // handle supriseBlock game mode
-      if (gameMode === "suprise block") {
-        const sub = Date.now() - tick;
-        // expression for randomness
-        if (sub % 8 === 0) {
-          console.log("change block");
-          const newBloco = getRandomBloco();
-          // check if the new block is valid in the current player's position before switching
-          if (validatePosition(player.pos, newBloco)) {
-            player.bloco = newBloco;
-          }
-        }
-      }
       return { ...player, pos: newPos };
     });
   };
@@ -197,6 +199,7 @@ const Game = () => {
 
   const keyUp = ({ keyCode }) => {
     if (pause || gameOver) return;
+    incrementKeyPress();
     const THRESHOLD = 80;
     // Activate the interval again when user releases down arrow.
     if (keyCode === 40) {
@@ -224,6 +227,24 @@ const Game = () => {
 
   const keyDown = ({ keyCode }) => {
     if (pause || gameOver) return;
+    // handle surpriseBlock game mode
+    if (gameMode === "surprise block") {
+      // change the block every 9th key press
+      if (keyPresses >= 9) {
+        const newBloco = getRandomBloco();
+        // check if the new block is valid in the current player's position and different than current block before switching
+        if (
+          validatePosition(player.pos, newBloco) &&
+          player.bloco.color !== newBloco.color
+        ) {
+          player.bloco = newBloco;
+          // calculate the hint for the new bloco
+          calculateHintPlayer(player);
+        }
+        // reset key presses
+        resetKeyPresses();
+      }
+    }
     switch (keyCode) {
       case 37:
         setPlayer((player) => ({ ...player, pos: getNewPlayerPos("left") }));
@@ -361,7 +382,6 @@ const Game = () => {
 
   function getRandomSpeed() {
     const SPEEDS = [450, 350, 250, 150];
-    console.log("random speed", SPEEDS[Math.floor(Math.random() * 4)]);
     return SPEEDS[Math.floor(Math.random() * 4)];
   }
 
