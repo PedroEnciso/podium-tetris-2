@@ -3,7 +3,9 @@ import React from "react";
 const GameModeContext = React.createContext();
 
 export function GameModeProvider({ children }) {
-  const [gameMode, setGameMode] = React.useState("surprise block");
+  const [gameMode, setGameMode] = React.useState("original");
+
+  console.log("game mode is", gameMode);
 
   function setRandomMode() {
     const MODES = ["original", "inverted", "surprise block", "random speed"];
