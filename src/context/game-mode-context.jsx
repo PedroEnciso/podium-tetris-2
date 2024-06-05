@@ -14,6 +14,7 @@ export function GameModeProvider({ children }) {
       { mode: "original", setter: setMode.bind(null, "original") },
       { mode: "inverted", setter: setMode.bind(null, "inverted") },
       { mode: "suprise block", setter: setMode.bind(null, "suprise block") },
+      { mode: "random speed", setter: setMode.bind(null, "random speed") },
     ];
   }
 

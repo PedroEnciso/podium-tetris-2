@@ -120,6 +120,7 @@ const Game = () => {
   const [dragX, setDragX] = useState(0);
   const [dragY, setDragY] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [speed, setSpeed] = useState(450);
 
   const { gameMode } = useGameMode();
 
@@ -132,6 +133,10 @@ const Game = () => {
     console.log("Score to next level:", nextLevelScore);
     console.log("Remaining: ", nextLevelScore - score);
     if (score >= nextLevelScore) setLevel(level + 1);
+    // update the speed if gameMode is random speed
+    if (gameMode === "random speed") {
+      setSpeed(getRandomSpeed());
+    }
   }, [level, score]);
 
   const restartGame = () => {
@@ -354,12 +359,22 @@ const Game = () => {
     [player, validatePosition]
   );
 
-  useInterval(
-    () => {
-      drop();
-    },
-    pause || gameOver ? null : down ? 50 : 450 - (level - 1) * 20
-  );
+  function getRandomSpeed() {
+    const SPEEDS = [450, 350, 250, 150];
+    console.log("random speed", SPEEDS[Math.floor(Math.random() * 4)]);
+    return SPEEDS[Math.floor(Math.random() * 4)];
+  }
+
+  let interval;
+  if (gameMode === "random speed") {
+    interval = pause || gameOver ? null : down ? 50 : speed;
+  } else {
+    interval = pause || gameOver ? null : down ? 50 : 450 - (level - 1) * 20;
+  }
+
+  useInterval(() => {
+    drop();
+  }, interval);
 
   useEffect(() => {
     if (!player) return;
