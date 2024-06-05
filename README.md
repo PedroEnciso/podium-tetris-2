@@ -1,46 +1,21 @@
 # React Tetris
 
-> Fully responsive tetris game built with ReactJS
+## Game Modes
 
-<p align="start">
-	  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/mpirescarvalho/react-tetris?style=flat">
-	  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/mpirescarvalho/react-tetris">
-	  <img alt="GitHub stars" src="https://img.shields.io/github/stars/mpirescarvalho/react-tetris?style=social">
-	  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/mpirescarvalho/react-tetris">
-	  <a href="https://mpirescarvalho.github.io/react-tetris/">
-			<img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fmpirescarvalho.github.io/react-tetris">
-    </a>
-</p>
+The game always starts on original mode, and randomly changes everytime the player increases their level. If the randomly chosen mode is the same as the current mode, the game is changed to original mode. This gives the user a break and does not allow them to play a weird mode for two consecutive levels.
 
-## Live
+### Original
 
-You can find the application live here:
-https://mpirescarvalho.github.io/react-tetris/
+The original rules and expected behavior of Tetris.
 
-<h1 align="center">
-  <img alt="React tetris desktop" title="#React tetris desktop" src="./assets/react-tetris-desktop-1.png" />
-  <img width="35%" alt="React tetris mobile 2" title="#React tetris mobile 2" src="./assets/react-tetris-mobile-2.png" />
-  <img width="35%" alt="React tetris mobile 1" title="#React tetris mobile 1" src="./assets/react-tetris-mobile-1.png" />
-</h1>
+### Inverted
 
-## Building
+Left and Right controls are swapped. All other behaviors are as expected in Oiginal Tetris. TODO: invert the behavior of gestures (mobile only).
 
-You'll need [Node.js](https://nodejs.org) installed on your computer in order to build this app.
+### Surprise Block
 
-```bash
-$ git clone https://github.com/mpirescarvalho/react-tetris.git
-$ cd react-tetris
-$ npm install
-$ npm run start
-```
+The current block will change into a randomly generated block after the user presses a key or gestures. The game will not swap out the current block if the randomly generated block does not fit in the current space or if the current block is the same as the randomly generated block. TODO: test functionality with gestures.
 
-Runs the app in the development mode.<br/>
+### Random Speed
 
-## Contact
-
-<a href="https://github.com/mpirescarvalho">
-  <img alt="made by Marcelo Carvalho" src="https://img.shields.io/badge/made%20by-Marcelo Carvalho-%237519C1">
-</a>
-<a href="mailto:mpirescarvalho17@gmail.com">
-  <img alt="made by Marcelo Carvalho" src="https://img.shields.io/badge/-mpirescarvalho17@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:mpirescarvalho17@gmail.com" />
-</a>
+The block moves at a speed chosen randomly between 450ms, 350ms, 250ms and 150ms per tick. The speed updates every time the score changes.
