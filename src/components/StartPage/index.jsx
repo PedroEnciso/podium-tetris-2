@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ChooseGameMode from "../ChooseGameMode";
 
 const StyledStartPage = styled.div`
   width: 100vw;
@@ -73,7 +74,7 @@ const StartButton = styled.button`
 const StartPage = ({ startClick }) => {
   return (
     <StyledStartPage>
-      <StartButton onClick={startClick}>Start</StartButton>
+      <ChooseGameMode startGame={startClick} />
     </StyledStartPage>
   );
 };
