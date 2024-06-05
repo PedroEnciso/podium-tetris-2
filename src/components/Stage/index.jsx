@@ -8,12 +8,14 @@ import StatusRow from "../StatusRow";
 import LoseGame from "../LoseGame";
 
 import Color from "color";
+import { useGameMode } from "../../context/game-mode-context";
 
 const Game = styled.div`
   width: 100vw;
   height: ${(props) => (props.$portrait ? "95" : "100")}vh;
   display: flex;
   flex-direction: ${(props) => (props.$portrait ? "column" : "row")};
+  flex-wrap: ${(props) => (props.$portrait ? "nowrap" : "wrap")};
   justify-content: center;
   align-items: center;
   background-image: url(${background});
@@ -156,6 +158,14 @@ const ContainerStatus = styled.div`
   font-size: ${(props) => props.$pixelSize}px;
 `;
 
+const ContainerGameMode = styled.div`
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+`;
+
 const getRenderizacaoBloco = (bloco) => {
   let trimRowBloco = [];
   let sumColumn = {};
@@ -223,9 +233,14 @@ const Stage = ({
     stageRef.current.focus();
   }, [theme3d]);
 
+  const { gameMode } = useGameMode();
+
   return (
     <div>
       <Game $portrait={portrait}>
+        <ContainerGameMode>
+          <p>{gameMode}</p>
+        </ContainerGameMode>
         {nextRender && (
           <ContainerNext $portrait={portrait} $pixelSize={pixelSize}>
             <Next
