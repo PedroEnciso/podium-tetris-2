@@ -5,22 +5,19 @@ const GameModeContext = React.createContext();
 export function GameModeProvider({ children }) {
   const [gameMode, setGameMode] = React.useState("original");
 
-  function setOriginalMode() {
-    setGameMode("original");
-  }
-
-  function setInvertedMode() {
-    setGameMode("inverted");
+  function setMode(mode) {
+    setGameMode(mode);
   }
 
   function getGameModes() {
     return [
-      { mode: "original", setter: setOriginalMode },
-      { mode: "inverted", setter: setInvertedMode },
+      { mode: "original", setter: setMode.bind(null, "original") },
+      { mode: "inverted", setter: setMode.bind(null, "inverted") },
+      { mode: "suprise block", setter: setMode.bind(null, "suprise block") },
     ];
   }
 
-  const value = { gameMode, setOriginalMode, setInvertedMode, getGameModes };
+  const value = { gameMode, getGameModes };
 
   return (
     <GameModeContext.Provider value={value}>

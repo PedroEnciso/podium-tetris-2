@@ -163,6 +163,19 @@ const Game = () => {
         if (!validatePosition(newPlayer.pos, newPlayer.bloco)) loseGame();
         return newPlayer;
       }
+      // handle supriseBlock game mode
+      if (gameMode === "suprise block") {
+        const sub = Date.now() - tick;
+        // expression for randomness
+        if (sub % 8 === 0) {
+          console.log("change block");
+          const newBloco = getRandomBloco();
+          // check if the new block is valid in the current player's position before switching
+          if (validatePosition(player.pos, newBloco)) {
+            player.bloco = newBloco;
+          }
+        }
+      }
       return { ...player, pos: newPos };
     });
   };
@@ -230,7 +243,7 @@ const Game = () => {
         break;
     }
   };
-
+  // key controls for inverted mode
   const keyDownInverted = ({ keyCode }) => {
     if (pause || gameOver) return;
     switch (keyCode) {
