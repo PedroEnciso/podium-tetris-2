@@ -3,22 +3,21 @@ import React from "react";
 const GameModeContext = React.createContext();
 
 export function GameModeProvider({ children }) {
-  const [gameMode, setGameMode] = React.useState("original");
+  const [gameMode, setGameMode] = React.useState("surprise block");
 
-  function setMode(mode) {
-    setGameMode(mode);
+  function setRandomMode() {
+    const MODES = ["original", "inverted", "surprise block", "random speed"];
+    const randomMode = MODES[Math.floor(Math.random() * 4)];
+    if (randomMode === gameMode) {
+      // if the new mode is equal to current mode, default to original mode
+      // this gives the user a break from the dumb game modes
+      setGameMode("original");
+      return;
+    }
+    setGameMode(randomMode);
   }
 
-  function getGameModes() {
-    return [
-      { mode: "original", setter: setMode.bind(null, "original") },
-      { mode: "inverted", setter: setMode.bind(null, "inverted") },
-      { mode: "suprise block", setter: setMode.bind(null, "suprise block") },
-      { mode: "random speed", setter: setMode.bind(null, "random speed") },
-    ];
-  }
-
-  const value = { gameMode, getGameModes };
+  const value = { gameMode, setRandomMode };
 
   return (
     <GameModeContext.Provider value={value}>
