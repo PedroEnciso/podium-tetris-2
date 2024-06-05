@@ -199,7 +199,6 @@ const Game = () => {
 
   const keyUp = ({ keyCode }) => {
     if (pause || gameOver) return;
-    incrementKeyPress();
     const THRESHOLD = 80;
     // Activate the interval again when user releases down arrow.
     if (keyCode === 40) {
@@ -230,30 +229,32 @@ const Game = () => {
     // handle surpriseBlock game mode
     if (gameMode === "surprise block") {
       // change the block every 9th key press
-      if (keyPresses >= 9) {
+      const isSidewaysMove = keyCode === 37 || keyCode === 39;
+      if (keyPresses > 9 && isSidewaysMove) {
         const newBloco = getRandomBloco();
         // check if the new block is valid in the current player's position and different than current block before switching
         if (
           validatePosition(player.pos, newBloco) &&
           player.bloco.color !== newBloco.color
         ) {
-          player.bloco = newBloco;
           // calculate the hint for the new bloco
-          calculateHintPlayer(player);
+          setPlayer({ ...player, bloco: newBloco });
+          resetKeyPresses();
+          return;
         }
-        // reset key presses
-        resetKeyPresses();
       }
     }
     switch (keyCode) {
       case 37:
         setPlayer((player) => ({ ...player, pos: getNewPlayerPos("left") }));
+        incrementKeyPress();
         break;
       case 38:
         rotatePlayer();
         break;
       case 39:
         setPlayer((player) => ({ ...player, pos: getNewPlayerPos("right") }));
+        incrementKeyPress();
         break;
       case 40:
         setTick(Date.now());
