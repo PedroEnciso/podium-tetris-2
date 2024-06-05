@@ -74,7 +74,8 @@ const StartButton = styled.button`
 const StartPage = ({ startClick }) => {
   return (
     <StyledStartPage>
-      <ChooseGameMode startGame={startClick} />
+      {/* <ChooseGameMode startGame={startClick} /> */}
+      <StartButton onClick={startClick}>Start</StartButton>
     </StyledStartPage>
   );
 };

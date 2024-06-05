@@ -90,7 +90,11 @@ const LoseGame = ({ status, portrait, pixelSize, theme3d, restartClick }) => (
         <StatusRow>LEVEL: {status.level}</StatusRow>
         <StatusRow>LINES: {status.lines}</StatusRow>
       </ContainerStatus>
-      <ChooseGameMode startGame={restartClick} />
+      <ContainerButton>
+        <Button $pixelSize={30} onClick={restartClick}>
+          Restart
+        </Button>
+      </ContainerButton>
     </LoseContainer>
   </CenterOverlay>
 );
