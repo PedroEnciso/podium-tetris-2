@@ -124,7 +124,7 @@ const Game = () => {
   const [speed, setSpeed] = useState(450);
   const [keyPresses, setKeyPresses] = useState(0);
 
-  const { gameMode, setRandomMode } = useGameMode();
+  const { gameMode, setRandomMode, resetGameMode } = useGameMode();
 
   // increment key press
   function incrementKeyPress() {
@@ -159,6 +159,8 @@ const Game = () => {
     setlines(0);
     setScore(0);
     setLevel(1);
+    setDown(false);
+    resetGameMode();
     setGameOver(false);
   };
 
