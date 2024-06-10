@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
+  width: ${(props) => props.$portrait && "30%"};
   background-color: ${(props) =>
     props.$backgroundColor ? props.$backgroundColor : "black"};
   transition: background-color 0.5s;
@@ -16,6 +17,7 @@ const Container = styled.div`
 
 const Title = styled.div`
   width: 100%;
+  font-size: ${(props) => props.$portrait && "1.2rem"};
   text-align: center;
   color: white;
 `;
@@ -42,7 +44,7 @@ const StatusRow = ({
     $borderSize={borderSize}
     $backgroundColor={backgroundColor}
   >
-    <Title>{title}</Title>
+    <Title $portrait={portrait}>{title}</Title>
     <Value>{value}</Value>
   </Container>
 );

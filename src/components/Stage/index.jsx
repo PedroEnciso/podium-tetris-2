@@ -12,7 +12,7 @@ import { useGameMode } from "../../context/game-mode-context";
 
 const Game = styled.div`
   width: 100vw;
-  height: ${(props) => (props.$portrait ? "95" : "100")}vh;
+  height: ${(props) => (props.$portrait ? "100" : "100")}vh;
   display: flex;
   flex-direction: ${(props) => (props.$portrait ? "column" : "row")};
   flex-wrap: ${(props) => (props.$portrait ? "nowrap" : "wrap")};
@@ -210,7 +210,7 @@ const Stage = ({
     let pixelSizeWidth = width / 32;
     if (portrait) {
       pixelSizeHeight = height / 26;
-      pixelSizeWidth = width / 12;
+      pixelSizeWidth = width / 13;
     }
     setPixelSize(
       pixelSizeWidth < pixelSizeHeight ? pixelSizeWidth : pixelSizeHeight
