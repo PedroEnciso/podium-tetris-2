@@ -3,7 +3,7 @@ import React from "react";
 const GameModeContext = React.createContext();
 
 export function GameModeProvider({ children }) {
-  const [gameMode, setGameMode] = React.useState("original");
+  const [gameMode, setGameMode] = React.useState("inverted");
 
   console.log("game mode is", gameMode);
 
@@ -13,10 +13,10 @@ export function GameModeProvider({ children }) {
     if (randomMode === gameMode) {
       // if the new mode is equal to current mode, default to original mode
       // this gives the user a break from the dumb game modes
-      setGameMode("original");
+      // setGameMode("original");
       return;
     }
-    setGameMode(randomMode);
+    // setGameMode(randomMode);
   }
 
   const value = { gameMode, setRandomMode };
