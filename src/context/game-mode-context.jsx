@@ -3,7 +3,7 @@ import React from "react";
 const GameModeContext = React.createContext();
 
 export function GameModeProvider({ children }) {
-  const [gameMode, setGameMode] = React.useState("inverted");
+  const [gameMode, setGameMode] = React.useState("original");
 
   console.log("game mode is", gameMode);
 
