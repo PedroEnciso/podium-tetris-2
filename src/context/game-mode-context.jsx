@@ -19,7 +19,11 @@ export function GameModeProvider({ children }) {
     setGameMode(randomMode);
   }
 
-  const value = { gameMode, setRandomMode };
+  function resetGameMode() {
+    setGameMode("original");
+  }
+
+  const value = { gameMode, setRandomMode, resetGameMode };
 
   return (
     <GameModeContext.Provider value={value}>
