@@ -13,10 +13,10 @@ export function GameModeProvider({ children }) {
     if (randomMode === gameMode) {
       // if the new mode is equal to current mode, default to original mode
       // this gives the user a break from the dumb game modes
-      // setGameMode("original");
+      setGameMode("original");
       return;
     }
-    // setGameMode(randomMode);
+    setGameMode(randomMode);
   }
 
   const value = { gameMode, setRandomMode };
