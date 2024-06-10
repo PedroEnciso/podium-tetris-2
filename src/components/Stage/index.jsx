@@ -13,7 +13,8 @@ import { useGameMode } from "../../context/game-mode-context";
 const Game = styled.div`
   width: 100vw;
   /* height: ${(props) => (props.$portrait ? "95" : "100")}vh; */
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100svh;
   overflow: hidden;
   display: flex;
   flex-direction: ${(props) => (props.$portrait ? "column" : "row")};
