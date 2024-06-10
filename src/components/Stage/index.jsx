@@ -213,7 +213,10 @@ const Stage = ({
     let pixelSizeWidth = width / 32;
     if (portrait) {
       pixelSizeHeight = height / 26;
-      pixelSizeWidth = width / 13;
+      // adjusting this value to make the vview fully visible on mobile devices
+      // a larger number makes each cell smaller
+      // original value as 12
+      pixelSizeWidth = width / 15;
     }
     setPixelSize(
       pixelSizeWidth < pixelSizeHeight ? pixelSizeWidth : pixelSizeHeight
