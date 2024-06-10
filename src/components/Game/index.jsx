@@ -411,12 +411,12 @@ const Game = () => {
           if (mx - dragX > 0)
             setPlayer((player) => ({
               ...player,
-              pos: getNewPlayerPos("right"),
+              pos: getNewPlayerPos(gameMode === inverted ? "left" : "right"),
             }));
           else
             setPlayer((player) => ({
               ...player,
-              pos: getNewPlayerPos("left"),
+              pos: getNewPlayerPos(gameMode === inverted ? "right" : "left"),
             }));
           setDragX(mx);
         }
