@@ -125,6 +125,7 @@ const Game = () => {
   const [keyPresses, setKeyPresses] = useState(0);
 
   const { gameMode, setRandomMode, resetGameMode } = useGameMode();
+  const { logNewKey, cheatIsActive, resetKeyLogger } = useKeyStrokeLogger();
 
   // increment key press
   function incrementKeyPress() {
@@ -162,6 +163,7 @@ const Game = () => {
     setDown(false);
     resetGameMode();
     setGameOver(false);
+    resetKeyLogger();
   };
 
   const loseGame = () => {
@@ -250,25 +252,37 @@ const Game = () => {
       case 37:
         setPlayer((player) => ({ ...player, pos: getNewPlayerPos("left") }));
         incrementKeyPress();
+        logNewKey("left");
         break;
       case 38:
         rotatePlayer();
+        logNewKey("up");
         break;
       case 39:
         setPlayer((player) => ({ ...player, pos: getNewPlayerPos("right") }));
         incrementKeyPress();
+        logNewKey("right");
         break;
       case 40:
         setTick(Date.now());
         setDown(true);
+        logNewKey("down");
         break;
       case 32:
         if (spaceReleased) {
           setSpaceReleased(false);
           forwardDown();
         }
+        logNewKey("space");
+        break;
+      case 65:
+        logNewKey("a");
+        break;
+      case 66:
+        logNewKey("b");
         break;
       default:
+        logNewKey("other");
         break;
     }
   };
@@ -442,6 +456,13 @@ const Game = () => {
     { filterTaps: true, lockDirection: true }
   );
 
+  const displayScore = cheatIsActive ? 69 : score;
+  const displayLines = cheatIsActive ? 69 : lines;
+  const displayLevel = cheatIsActive ? 69 : level;
+
+  // MY HOOKS
+  useShowCongratsMessage(score);
+
   if (!player || !map || !hintPlayer)
     return (
       <Center>
@@ -456,7 +477,7 @@ const Game = () => {
       player={player}
       hint={hintPlayer}
       paused={pause}
-      status={{ lines, score, level }}
+      status={{ lines: displayLines, score: displayScore, level: displayLevel }}
       onBlur={() => setPause(true)}
       onFocus={() => setPause(false)}
       tabIndex="0"
@@ -469,3 +490,57 @@ const Game = () => {
 };
 
 export default Game;
+
+// my custom hooks
+const useShowCongratsMessage = (score) => {
+  const [first, setFirst] = useState(false);
+  const [second, setSecond] = useState(false);
+  const [third, setThird] = useState(false);
+
+  if (!first && score > 10000) {
+    setFirst(true);
+    console.log("YOU ARE SICK");
+  }
+  if (!second && score > 20000) {
+    setSecond(true);
+    console.log("WAY TO GO CHAMP");
+  }
+  if (!third && score > 35000) {
+    setThird(true);
+    console.log("YOU ARE TOO GOOD");
+  }
+};
+
+const useKeyStrokeLogger = () => {
+  const [keys, setKeys] = useState([]);
+  const [cheatIsActive, setCheatIsActive] = useState(false);
+  const TARGET = ["up", "up", "down", "down", "left", "right", "a", "b"];
+
+  function logNewKey(newKey) {
+    let copyArray = [...keys];
+    // check if the log array has length 8
+    if (keys.length === 8) {
+      // if it does, remove the first element of the array
+      copyArray.shift();
+    }
+    // add the new key to the end of the array
+    copyArray = [...copyArray, newKey];
+    // check if the array matches the target array
+    if (copyArray.length === TARGET.length) {
+      const correctKeyStrokes = TARGET.filter(
+        (item, index) => item === copyArray[index]
+      );
+      if (correctKeyStrokes.length === 8) {
+        // if it does, set state to true
+        setCheatIsActive(true);
+      }
+    }
+    setKeys(copyArray);
+  }
+
+  function resetKeyLogger() {
+    setCheatIsActive(false);
+  }
+
+  return { logNewKey, cheatIsActive, resetKeyLogger };
+};
