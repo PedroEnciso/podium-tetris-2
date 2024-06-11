@@ -10,11 +10,11 @@ The original rules and expected behavior of Tetris.
 
 ### Inverted
 
-Left and Right controls are swapped. All other behaviors are as expected in Oiginal Tetris. TODO: invert the behavior of gestures (mobile only).
+Left and Right controls are swapped. All other behaviors are as expected in Oiginal Tetris.
 
 ### Surprise Block
 
-The current block will change into a randomly generated block after the user presses a key or gestures. The game will not swap out the current block if the randomly generated block does not fit in the current space or if the current block is the same as the randomly generated block. TODO: test functionality with gestures.
+The current block will change into a randomly generated block after the user presses a left or right arrow key or gestures. The game will not swap out the current block if the randomly generated block does not fit in the current space or if the current block is the same as the randomly generated block. TODO: implement functionality with gestures.
 
 ### Random Speed
 
