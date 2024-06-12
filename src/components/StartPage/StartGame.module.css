@@ -1,0 +1,52 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 0rem 5rem;
+  align-items: center;
+  font-family: "VT323", monospace;
+  background-color: transparent;
+}
+
+.title {
+  /* font-family: "Press Start 2P", system-ui; */
+  font-size: 9rem;
+  text-align: center;
+  text-shadow: 0px 8px #6d28d9;
+  color: #c026d3;
+}
+
+.button {
+  font-family: "VT323", monospace;
+  font-size: 3rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 50px 100px;
+  text-decoration: blink solid white;
+  animation: blinker 3s linear infinite;
+  text-shadow: 0px 4px #6d28d9;
+  color: #c026d3;
+}
+
+.copywrite {
+  color: #c026d3;
+  font-size: 1.2rem;
+}
+
+@keyframes blinker {
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+}
+
+/* Beach: #c026d3 #6d28d9 */

@@ -21,7 +21,7 @@ const Game = styled.div`
   flex-wrap: ${(props) => (props.$portrait ? "nowrap" : "wrap")};
   justify-content: center;
   align-items: center;
-  background-image: url(${background});
+  /* background-image: url(${background}); */
   background-size: cover;
   background-position: center;
 `;

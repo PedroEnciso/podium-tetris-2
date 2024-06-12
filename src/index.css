@@ -1,19 +1,31 @@
 * {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-	user-select: none;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  user-select: none;
 }
 
 html {
-	overflow: hidden;
-	width: 100%;
+  overflow: hidden;
+  width: 100%;
 }
 
 body {
-	height: 100%;
-	position: fixed;
-	/* prevent overscroll bounce*/
-	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
+  height: 100svh;
+  position: fixed;
+  /* prevent overscroll bounce*/
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-image: url("./images/dark.webp");
+  background-position: bottom;
+  background-color: #041929;
+}
+
+.background-mask {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.3;
+  position: absolute;
+  z-index: -1;
 }
