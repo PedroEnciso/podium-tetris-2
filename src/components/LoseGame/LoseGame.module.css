@@ -1,0 +1,68 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 2rem;
+}
+
+.container {
+  transition: all 0.2s;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  font-family: "VT323", monospace;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem 2rem;
+}
+
+.title {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.score_grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  grid-gap: 0.5rem 0px;
+}
+
+.subgrid {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / 4;
+}
+
+.center_align {
+  justify-items: center;
+}
+
+.right_align {
+  justify-items: end;
+}
+
+.top_row {
+  font-size: 80%;
+  margin-bottom: 0.25rem;
+}
+
+.top_row_item {
+  padding-right: 10px;
+}
+
+.current {
+  color: #c026d3;
+}

@@ -388,13 +388,7 @@ const Stage = ({
         )}
       </Game>
       {lose && (
-        <LoseGame
-          portrait={portrait}
-          restartClick={restartClick}
-          status={status}
-          pixelSize={pixelSize}
-          theme3d={theme3d}
-        ></LoseGame>
+        <LoseGame restartClick={restartClick} status={status}></LoseGame>
       )}
     </div>
   );

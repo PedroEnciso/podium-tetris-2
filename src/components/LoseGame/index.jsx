@@ -1,102 +1,83 @@
 import React from "react";
-import styled from "styled-components";
-import ChooseGameMode from "../ChooseGameMode";
+import style from "./LoseGame.module.css";
 
-const CenterOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const LoseGame = ({ status, portrait, pixelSize, theme3d, restartClick }) => {
+  const DUMMY_DATA = [
+    {
+      id: "1",
+      rank: "1st",
+      name: "Paul",
+      score: 100000,
+      isCurrentPlayer: false,
+    },
+    {
+      id: "2",
+      rank: "2nd",
+      name: "Jeff",
+      score: 90000,
+      isCurrentPlayer: false,
+    },
+    {
+      id: "3",
+      rank: "3rd",
+      name: "Leo",
+      score: 80000,
+      isCurrentPlayer: false,
+    },
+    {
+      id: "4",
+      rank: "4th",
+      name: "Jess",
+      score: 50000,
+      isCurrentPlayer: false,
+    },
+    {
+      id: "5",
+      rank: "5th",
+      name: "Dylan",
+      score: 1,
+      isCurrentPlayer: false,
+    },
+    {
+      id: "6",
+      rank: "",
+      name: "You",
+      score: status.score,
+      isCurrentPlayer: true,
+    },
+  ];
 
-const LoseContainer = styled.div`
-  transition: all 0.2s;
-  width: ${(props) => props.$pixelSize * (props.$portrait ? 12 : 20)}px;
-  height: ${(props) => props.$pixelSize * (props.$portrait ? 20 : 10)}px;
-  border: ${(props) => props.$pixelSize / 10}px solid white;
-  background-color: ${(props) => (props.$theme3d ? "#444" : "#000")};
-  font-size: ${(props) => props.$pixelSize}px;
-  font-family: "ZCOOL QingKe HuangYou", cursive;
-  color: white;
-  display: flex;
-  flex-flow: column;
-`;
-
-const Title = styled.div`
-  width: 100%;
-  font-size: 2em;
-  padding: ${(props) => (props.$portrait ? 10 : 2)}% 0;
-  text-align: center;
-  border-bottom: 1px solid white;
-  flex: 0 1 auto;
-`;
-
-const ContainerStatus = styled.div`
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-`;
-
-const StatusRow = styled.div`
-  text-align: center;
-`;
-
-const ContainerButton = styled.div`
-  flex: 0 1 auto;
-  padding: ${(props) => (props.$portrait ? 10 : 2)}% 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid white;
-`;
-
-const Button = styled.button`
-  width: ${(props) => props.$pixelSize * 10}px;
-  height: ${(props) => props.$pixelSize * 2}px;
-  font-size: ${(props) => props.$pixelSize / 1.5}px;
-  font-family: "ZCOOL QingKe HuangYou", cursive;
-  color: white;
-  border: ${(props) => props.$pixelSize / 20}px solid white;
-  border-radius: ${(props) => props.$pixelSize / 10}px;
-  background-color: rgba(0, 0, 0, 0);
-  transition: all 0.5s;
-
-  :hover {
-    color: #222;
-    border: ${(props) => props.$pixelSize / 20}px solid rgba(0, 0, 0, 0);
-    background-color: white;
-  }
-`;
-
-const LoseGame = ({ status, portrait, pixelSize, theme3d, restartClick }) => (
-  <CenterOverlay>
-    <LoseContainer
-      $portrait={portrait}
-      $pixelSize={pixelSize}
-      $theme3d={theme3d}
-    >
-      <Title $portrait={portrait}>Game Over</Title>
-      <ContainerStatus>
-        <StatusRow>SCORE: {status.score}</StatusRow>
-        <StatusRow>LEVEL: {status.level}</StatusRow>
-        <StatusRow>LINES: {status.lines}</StatusRow>
-      </ContainerStatus>
-      <ContainerButton>
-        <Button $pixelSize={30} onClick={restartClick}>
-          Restart
-        </Button>
-      </ContainerButton>
-    </LoseContainer>
-  </CenterOverlay>
-);
+  return (
+    <div className={style.overlay}>
+      <div className={style.container}>
+        <p className={style.title}>HIGH SCORES</p>
+        <div className={style.score_grid}>
+          <div
+            className={`${style.subgrid} ${style.top_row} ${style.right_align}`}
+          >
+            <p className={style.top_row_item}>RANK</p>
+            <p className={style.top_row_item}>NAME</p>
+            <p className={style.top_row_item}>SCORE</p>
+          </div>
+          {DUMMY_DATA.map((score) => (
+            <div
+              key={score.id}
+              className={`${style.subgrid} ${style.right_align} ${
+                score.isCurrentPlayer ? `${style.current} blink` : ""
+              }`}
+            >
+              <p>{score.rank}</p>
+              <p>{score.name}</p>
+              <p>{score.score}</p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <button onClick={restartClick}>Restart</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default LoseGame;
