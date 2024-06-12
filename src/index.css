@@ -19,6 +19,7 @@ body {
   background-image: url("./images/dark.webp");
   background-position: bottom;
   background-color: #041929;
+  font-family: "VT323", monospace;
 }
 
 .background-mask {
@@ -28,4 +29,20 @@ body {
   opacity: 0.3;
   position: absolute;
   z-index: -1;
+}
+
+.blink {
+  animation: blinker 3s linear infinite;
+}
+
+@keyframes blinker {
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
 }
