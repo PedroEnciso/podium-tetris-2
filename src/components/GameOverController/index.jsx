@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GameOver from "../GameOver";
-import LoseGame from "../LoseGame";
+import Leaderboard from "../Leaderboard";
 import NewHighScore from "../NewHighScore";
 
 function GameOverController({ restartClick, status }) {
@@ -25,7 +25,7 @@ function GameOverController({ restartClick, status }) {
   }
 
   if (currentScreen === "leaderboard") {
-    return <LoseGame restartClick={restartClick} status={status} />;
+    return <Leaderboard restartClick={restartClick} status={status} />;
   }
 
   return null;

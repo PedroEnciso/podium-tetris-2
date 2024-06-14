@@ -1,7 +1,13 @@
 import React from "react";
-import style from "./LoseGame.module.css";
+import style from "./Leaderboard.module.css";
 
-const LoseGame = ({ status, portrait, pixelSize, theme3d, restartClick }) => {
+const Leaderboard = ({
+  status,
+  portrait,
+  pixelSize,
+  theme3d,
+  restartClick,
+}) => {
   const DUMMY_DATA = [
     {
       id: "1",
@@ -82,4 +88,4 @@ const LoseGame = ({ status, portrait, pixelSize, theme3d, restartClick }) => {
   );
 };
 
-export default LoseGame;
+export default Leaderboard;
