@@ -73,7 +73,9 @@ const LoseGame = ({ status, portrait, pixelSize, theme3d, restartClick }) => {
           ))}
         </div>
         <div>
-          <button onClick={restartClick}>Restart</button>
+          <button onClick={restartClick} className="btn">
+            RESTART
+          </button>
         </div>
       </div>
     </div>
