@@ -5,7 +5,6 @@ import Switch from "react-switch";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import background from "../../images/background.jpg";
 import StatusRow from "../StatusRow";
-import LoseGame from "../LoseGame";
 import GameOverController from "../GameOverController";
 
 import Color from "color";
@@ -393,9 +392,6 @@ const Stage = ({
       {lose ? (
         <GameOverController restartClick={restartClick} status={status} />
       ) : null}
-      {/* {lose && (
-        <LoseGame restartClick={restartClick} status={status}></LoseGame>
-      )} */}
     </div>
   );
 };
