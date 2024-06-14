@@ -31,6 +31,16 @@ body {
   z-index: -1;
 }
 
+.btn {
+  font-family: "VT323", monospace;
+  color: #c026d3;
+  font-size: 2rem;
+  border: none;
+  background-color: transparent;
+  padding: 2rem;
+  cursor: pointer;
+}
+
 .blink {
   animation: blinker 3s linear infinite;
 }
