@@ -6,6 +6,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import background from "../../images/background.jpg";
 import StatusRow from "../StatusRow";
 import LoseGame from "../LoseGame";
+import GameOverController from "../GameOverController";
 
 import Color from "color";
 import { useGameMode } from "../../context/game-mode-context";
@@ -64,6 +65,7 @@ const StyledStage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const Center = styled.div`
@@ -316,6 +318,7 @@ const Stage = ({
             {...others}
             $theme3d={theme3d}
             $pixelSize={pixelSize}
+            id="stage"
           >
             {map.map((row, y) => (
               <Row $stage="true" $pixelSize={pixelSize} key={`row-${y}`}>
@@ -387,9 +390,12 @@ const Stage = ({
           </ContainerStatus>
         )}
       </Game>
-      {lose && (
+      {lose ? (
+        <GameOverController restartClick={restartClick} status={status} />
+      ) : null}
+      {/* {lose && (
         <LoseGame restartClick={restartClick} status={status}></LoseGame>
-      )}
+      )} */}
     </div>
   );
 };
