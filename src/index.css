@@ -41,6 +41,10 @@ body {
   cursor: pointer;
 }
 
+.btn:disabled {
+  display: none;
+}
+
 .blink {
   animation: blinker 3s linear infinite;
 }
