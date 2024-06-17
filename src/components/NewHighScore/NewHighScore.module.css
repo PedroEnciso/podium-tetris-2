@@ -18,25 +18,55 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  text-align: center;
+  color: #c026d3;
+}
+
+.score {
+  font-size: 2.25rem;
+  text-align: center;
 }
 
 .place {
-  font-size: 3rem;
+  font-size: 3.25rem;
+  text-align: center;
+}
+
+.text {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.mt {
+  margin-top: 10px;
 }
 
 .input {
+  margin: 0 auto;
+  transform: translateX(10px);
   color: white;
-  padding: 10px 5px;
-  border: 1px solid;
-  font-family: monospace;
-  width: calc(8 * (1ch + 5px));
-  font-size: 20px;
-  letter-spacing: 5px;
-  background: repeating-linear-gradient(
+  width: calc(3 * (1ch + 20px) + 1ch + 20px);
+  overflow-x: hidden;
+  border: none;
+  font-size: 3.25rem;
+  letter-spacing: 20px;
+  font-family: "VT323", monospace;
+  text-transform: uppercase;
+  background: linear-gradient(
       to right,
-      blue 0 1ch,
-      transparent 1ch calc(1ch + 5px)
+      white 0 1ch,
+      transparent 1ch calc(1ch + 20px),
+      white calc(1ch + 20px) calc(2ch + 20px),
+      transparent calc(2ch + 20px) calc(2ch + 40px),
+      white calc(2ch + 40px) calc(3ch + 40px),
+      transparent calc(3ch + 40px) calc(3ch + 60px),
+      white calc(3ch + 60px) calc(4ch + 60px),
+      transparent calc(4ch + 60px) calc(4ch + 80px)
     )
-    bottom/100% 2px content-box no-repeat;
+    bottom/100% 4px content-box no-repeat;
+}
+
+.btn_shadow {
+  text-shadow: 0px 3px #6d28d9;
 }
