@@ -12,12 +12,12 @@ html {
 
 body {
   height: 100svh;
-  position: fixed;
+  /* position: fixed; */
   /* prevent overscroll bounce*/
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  background-image: url("./images/dark.webp");
-  background-position: bottom;
+  background-image: url("./images/moon.jpg");
+  background-size: cover;
   background-color: #041929;
   font-family: "VT323", monospace;
 }
