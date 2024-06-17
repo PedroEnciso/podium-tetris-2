@@ -69,7 +69,7 @@ const Leaderboard = ({
             <div
               key={score.id}
               className={`${style.subgrid} ${style.right_align} ${
-                score.isCurrentPlayer ? `${style.current} blink` : ""
+                score.isCurrentPlayer ? `${style.current}` : ""
               }`}
             >
               <p>{score.rank}</p>
@@ -78,9 +78,12 @@ const Leaderboard = ({
             </div>
           ))}
         </div>
-        <div>
-          <button onClick={restartClick} className="btn">
-            RESTART
+        <div className={style.center}>
+          <button
+            onClick={restartClick}
+            className={`btn blink ${style.btn_shadow}`}
+          >
+            NEW GAME
           </button>
         </div>
       </div>
