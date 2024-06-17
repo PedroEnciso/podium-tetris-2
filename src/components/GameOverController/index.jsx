@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GameOver from "../GameOver";
 import Leaderboard from "../Leaderboard";
 import NewHighScore from "../NewHighScore";
@@ -6,13 +6,14 @@ import NewHighScore from "../NewHighScore";
 function GameOverController({ restartClick, status }) {
   // can be 'game over' | 'new high score' | 'leaderboard'
   const [currentScreen, setCurrentScreen] = useState("game over");
-  const { fetchWithTimeout } = useFetchWithTimeout();
+  // const { data, error, fetchPlace } = useFetch();
 
   function showLeaderboard() {
     setCurrentScreen("leaderboard");
   }
 
   if (currentScreen === "game over") {
+    // fetchPlace()
     setTimeout(() => {
       setCurrentScreen("new high score");
     }, 2000);
@@ -30,6 +31,27 @@ function GameOverController({ restartClick, status }) {
 
   return null;
 }
+
+const useFetch = () => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  async function fetchPlace() {
+    try {
+      const response = await fetch("url");
+
+      if (!response.ok) {
+        throw new Error("there was an issue");
+      }
+
+      setData(await response.json());
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  return { data, error, fetchPlace };
+};
 
 const useFetchWithTimeout = () => {
   function delay(ms) {
