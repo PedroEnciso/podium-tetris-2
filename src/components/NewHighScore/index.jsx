@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import style from "./NewHighScore.module.css";
 
 function NewHighScore({ onSubmit, place = "4th" }) {
-  const name = useRef();
-  // const {data, error, isLoading, submitHighScore} = usePostRequest();
+  const [name, setName] = useState("");
+  const { data, error, isLoading, submitHighScore } = usePostRequest();
 
   function submit(e) {
     e.preventDefault();
@@ -12,6 +12,15 @@ function NewHighScore({ onSubmit, place = "4th" }) {
     // submitHighScore(place, score, name)
     onSubmit();
   }
+
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+
+  // true if isLoading is true, or if nameinput length is not 4 chars long
+  const isDisabled = isLoading || name.length !== 4;
+
+  console.log(isDisabled);
 
   return (
     <>
@@ -28,14 +37,20 @@ function NewHighScore({ onSubmit, place = "4th" }) {
             </div>
             <div>
               <input
+                onChange={handleNameChange}
                 type="text"
-                ref={name}
+                value={name}
                 className={style.input}
                 maxLength="4"
               />
               <p className={`${style.text} ${style.mt}`}>Enter your name</p>
             </div>
-            <button className={`${style.btn_shadow} btn blink`}>SUBMIT</button>
+            <button
+              disabled={isDisabled}
+              className={`${style.btn_shadow} btn blink`}
+            >
+              SUBMIT
+            </button>
           </form>
         </div>,
         document.body
