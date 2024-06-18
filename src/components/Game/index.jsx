@@ -337,6 +337,7 @@ const Game = () => {
                 }));
         });
         setlines((quant) => quant + rowsClear.length);
+        /// calc score
         const bonusLevel = 100 * (level * level);
         const bonusRows = 40 * (rowsClear.length * rowsClear.length - 1);
         setScore(
