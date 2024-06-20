@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDrag } from "react-use-gesture";
 import BarLoader from "react-spinners/BarLoader";
 
@@ -9,6 +9,7 @@ import Center from "../Center";
 import { PrintPlayerInMap } from "../../utils/Utils";
 
 import { useGameMode } from "../../context/game-mode-context";
+import { usePopUpContext } from "../../context/pop-up-context";
 
 //TODO: Alterar OnClick (rotatePlayer) para OnFastClick (criar hook)
 //TODO: Organização do componente "Game" (Separar codigo em hooks, outros components e funcoes)
@@ -126,6 +127,7 @@ const Game = () => {
 
   const { gameMode, setRandomMode, resetGameMode } = useGameMode();
   const { logNewKey, cheatIsActive, resetKeyLogger } = useKeyStrokeLogger();
+  const { handlePopUpRows } = usePopUpContext();
 
   // increment key press
   function incrementKeyPress() {
@@ -154,6 +156,19 @@ const Game = () => {
       setRandomMode();
     }
   }, [level]);
+
+  // ref to handle previous level state
+  const prevLinesRef = useRef(0);
+  useEffect(() => {
+    // update the popup with the change of lines
+    const linesChange = lines - prevLinesRef.current;
+    console.log(`lines change is ${linesChange}`);
+    if (linesChange > 1) {
+      handlePopUpRows(linesChange);
+    }
+    // re-assign previous lines
+    prevLinesRef.current = lines;
+  }, [lines]);
 
   const restartGame = () => {
     setMap(initialMap); //TODO: lose game
