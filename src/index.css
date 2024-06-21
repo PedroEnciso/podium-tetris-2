@@ -16,7 +16,7 @@ body {
   /* prevent overscroll bounce*/
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  background-image: url("./images/stars.jpg");
+  background-image: url("./images/moon.jpg");
   background-size: cover;
   background-position: top;
   background-color: #041929;
