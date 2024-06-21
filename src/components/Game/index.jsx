@@ -127,7 +127,7 @@ const Game = () => {
 
   const { gameMode, setRandomMode, resetGameMode } = useGameMode();
   const { logNewKey, cheatIsActive, resetKeyLogger } = useKeyStrokeLogger();
-  const { handlePopUpRows } = usePopUpContext();
+  const { handlePopUpRows, handlePopUpScore } = usePopUpContext();
 
   // increment key press
   function incrementKeyPress() {
@@ -156,6 +156,15 @@ const Game = () => {
       setRandomMode();
     }
   }, [level]);
+
+  // ref to keep track of the previous score
+  const prevScoreRef = useRef(0);
+  useEffect(() => {
+    // pass the previous and current score to pop up handler
+    handlePopUpScore(prevScoreRef.current, score);
+    // update prev score
+    prevScoreRef.current = score;
+  }, [score]);
 
   // ref to handle previous level state
   const prevLinesRef = useRef(0);
@@ -476,9 +485,6 @@ const Game = () => {
   const displayLines = cheatIsActive ? 69 : lines;
   const displayLevel = cheatIsActive ? 69 : level;
 
-  // MY HOOKS
-  useShowCongratsMessage(score);
-
   if (!player || !map || !hintPlayer)
     return (
       <Center>
@@ -508,28 +514,10 @@ const Game = () => {
 export default Game;
 
 // my custom hooks
-const useShowCongratsMessage = (score) => {
-  const [first, setFirst] = useState(false);
-  const [second, setSecond] = useState(false);
-  const [third, setThird] = useState(false);
-
-  if (!first && score > 10000) {
-    setFirst(true);
-    console.log("YOU ARE SICK");
-  }
-  if (!second && score > 20000) {
-    setSecond(true);
-    console.log("WAY TO GO CHAMP");
-  }
-  if (!third && score > 35000) {
-    setThird(true);
-    console.log("YOU ARE TOO GOOD");
-  }
-};
-
 const useKeyStrokeLogger = () => {
   const [keys, setKeys] = useState([]);
   const [cheatIsActive, setCheatIsActive] = useState(false);
+  const { handlePopUpScore } = usePopUpContext();
   const TARGET = ["up", "up", "down", "down", "left", "right", "a", "b"];
 
   function logNewKey(newKey) {
@@ -549,6 +537,8 @@ const useKeyStrokeLogger = () => {
       if (correctKeyStrokes.length === 8) {
         // if it does, set state to true
         setCheatIsActive(true);
+        // activate the pop up
+        handlePopUpScore(0, -1);
       }
     }
     setKeys(copyArray);
