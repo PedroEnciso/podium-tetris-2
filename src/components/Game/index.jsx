@@ -10,6 +10,7 @@ import { PrintPlayerInMap } from "../../utils/Utils";
 
 import { useGameMode } from "../../context/game-mode-context";
 import { usePopUpContext } from "../../context/pop-up-context";
+import { useServer } from "../../hooks/useServer";
 
 //TODO: Alterar OnClick (rotatePlayer) para OnFastClick (criar hook)
 //TODO: Organização do componente "Game" (Separar codigo em hooks, outros components e funcoes)
@@ -128,6 +129,7 @@ const Game = () => {
   const { gameMode, setRandomMode, resetGameMode } = useGameMode();
   const { logNewKey, cheatIsActive, resetKeyLogger } = useKeyStrokeLogger();
   const { handlePopUpRows, handlePopUpScore } = usePopUpContext();
+  const { postRequest: updateScore } = useServer("update");
 
   // increment key press
   function incrementKeyPress() {
@@ -367,6 +369,8 @@ const Game = () => {
         setScore(
           (score) => score + 300 * rowsClear.length + bonusRows + bonusLevel
         );
+        // send request to update score on server
+        updateScore({ lines: rowsClear.length, level });
         return newMap;
       }
       return map;
