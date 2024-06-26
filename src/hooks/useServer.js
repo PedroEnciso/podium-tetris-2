@@ -81,6 +81,7 @@ export const useServer = (type) => {
 
       if (!response.ok) {
         const responseData = await response.json();
+        console.log("error", responseData.error.message);
         throw new Error(
           response.status === 406
             ? responseData.message
