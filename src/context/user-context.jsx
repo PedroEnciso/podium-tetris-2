@@ -1,18 +1,37 @@
 import React from "react";
+import { useServer } from "../hooks/useServer";
 
 const UserContext = React.createContext();
 
 export function UserContextProvider({ children }) {
-  const [user, setUser] = React.useState(null);
+  const [userId, setUserId] = React.useState(null);
+  const {
+    postRequest: getGameId,
+    data: gameId,
+    error: errorGameId,
+    isLoading: isLoadingGameId,
+    resetData: resetGameId,
+  } = useServer("startGame");
 
   React.useEffect(() => {
     // get user on load
-    // setUser("1234");
+    setUserId("1234");
+    // fetch the game id
+    getGameId();
   }, []);
 
-  const value = { user };
+  function getNewGameId() {
+    resetGameId();
+    getGameId();
+  }
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  const value = { userId, gameId, getNewGameId, errorGameId };
+
+  return (
+    <UserContext.Provider value={value}>
+      {!isLoadingGameId ? children : null}
+    </UserContext.Provider>
+  );
 }
 
 export function useUserContext() {

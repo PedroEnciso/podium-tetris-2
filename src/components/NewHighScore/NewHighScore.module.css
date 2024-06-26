@@ -41,6 +41,10 @@
   margin-top: 10px;
 }
 
+.error {
+  color: red;
+}
+
 .input {
   margin: 0 auto;
   transform: translateX(10px);
