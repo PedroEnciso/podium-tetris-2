@@ -3,19 +3,19 @@ import { createPortal } from "react-dom";
 import LoginForm from "./LoginForm";
 import style from "./NewHighScore.module.css";
 
-function NewHighScore({ onSubmit, place = "4th", user }) {
+function NewHighScore({ onSubmit, place, userId, score, isLoading, error }) {
   const [name, setName] = useState("");
-  const { data, error, isLoading, submitHighScore } = usePostRequest();
+  const { getPlace } = useGetPlace();
+
+  console.log("place", place);
 
   function submit(e) {
     e.preventDefault();
-
-    // submitHighScore(place, score, name)
-    onSubmit();
+    onSubmit(name);
   }
 
   function handleNameChange(e) {
-    setName(e.target.value);
+    setName(e.target.value.toUpperCase());
   }
 
   // true if isLoading is true, or if nameinput length is not 4 chars long
@@ -28,13 +28,13 @@ function NewHighScore({ onSubmit, place = "4th", user }) {
           <form onSubmit={submit} className={style.form}>
             <div>
               <p className={style.title}>NEW HIGH SCORE!</p>
-              <p className={style.score}>100000</p>
+              <p className={style.score}>{score}</p>
             </div>
             <div>
               <p className={style.text}>You placed</p>
-              <p className={style.place}>{place}</p>
+              <p className={style.place}>{getPlace(place)}</p>
             </div>
-            {user ? (
+            {userId ? (
               <div>
                 <input
                   onChange={handleNameChange}
@@ -43,15 +43,21 @@ function NewHighScore({ onSubmit, place = "4th", user }) {
                   className={style.input}
                   maxLength="4"
                 />
-                <p className={`${style.text} ${style.mt}`}>Enter your name</p>
+                {!error ? (
+                  <p className={`${style.text} ${style.mt}`}>Enter your name</p>
+                ) : (
+                  <p className={`${style.text} ${style.mt} ${style.error}`}>
+                    {error}
+                  </p>
+                )}
               </div>
             ) : null}
-            {user ? (
+            {userId ? (
               <button
                 disabled={isDisabled}
                 className={`${style.btn_shadow} btn blink`}
               >
-                SUBMIT
+                {isLoading ? "SUBMITTING" : "SUBMIT"}
               </button>
             ) : (
               <LoginForm onSubmit={onSubmit} />
@@ -64,29 +70,22 @@ function NewHighScore({ onSubmit, place = "4th", user }) {
   );
 }
 
-const usePostRequest = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+const useGetPlace = () => {
+  function getPlace(place) {
+    const lastDigit = place % 10;
 
-  async function submitHighScore() {
-    setIsLoading(true);
-    try {
-      ///// CHANGE URL
-      const response = await fetch("url");
-
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-
-      setData(await response.json());
-    } catch (error) {
-      setError(error.message);
+    switch (lastDigit) {
+      case 1:
+        return `${place}st`;
+      case 2:
+        return `${place}nd`;
+      case 3:
+        return `${place}rd`;
+      default:
+        return `${place}th`;
     }
-    setIsLoading(false);
   }
-
-  return { data, error, isLoading, submitHighScore };
+  return { getPlace };
 };
 
 export default NewHighScore;

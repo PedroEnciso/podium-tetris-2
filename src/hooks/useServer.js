@@ -38,39 +38,65 @@
 import { useState } from "react";
 
 export const useServer = (type) => {
-  const BASE_URL = "http://localhost:5173";
+  const BASE_URL = "https://321-podium.elevatedloyalty.com/api/public";
+  let METHOD = "POST";
   let URL = "";
   switch (type) {
+    case "startGame":
+      URL = `${BASE_URL}/startGame`;
+      break;
     case "update":
-      URL = `${BASE_URL}/score/update`;
+      URL = `${BASE_URL}/updateScore`;
       break;
     case "gameOver":
-      URL = `${BASE_URL}/score/gameOver`;
+      URL = `${BASE_URL}/checkScoreRank`;
+      break;
+    case "highScore":
+      URL = `${BASE_URL}/saveScoreToLeaderboard`;
+    case "scoreboard":
+      URL = `${BASE_URL}/scoreboard`;
+      METHOD = "GET";
+      break;
   }
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function postRequest(requestBody) {
+    setIsLoading(true);
+    setError(null);
+    const options =
+      METHOD === "POST"
+        ? {
+            method: METHOD,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+          }
+        : {};
+
     try {
-      const response = await fetch(URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
+      const response = await fetch(URL, options);
 
       if (!response.ok) {
-        throw new Error(response.message || "there was an issue");
+        const responseData = await response.json();
+        throw new Error(
+          response.status === 406
+            ? responseData.message
+            : "There was an issue. Please try again."
+        );
       }
-      const stuff = await response.json();
-      setData(stuff);
-      console.log("response", stuff);
+      setData(await response.json());
     } catch (error) {
-      console.log("there was an error", error.message);
       setError(error.message);
     }
+    setIsLoading(false);
   }
 
-  return { data, error, postRequest };
+  function resetData() {
+    setData(null);
+  }
+
+  return { data, error, isLoading, postRequest, resetData };
 };
