@@ -24,6 +24,10 @@ export function UserContextProvider({ children }) {
     resetGameId();
     getGameId();
   }
+  // log error
+  if (errorGameId) {
+    console.log("error", errorGameId);
+  }
 
   const value = { userId, gameId, getNewGameId, errorGameId };
 
