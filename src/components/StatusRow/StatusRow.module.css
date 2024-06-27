@@ -1,0 +1,5 @@
+.container {
+  transition: background-color 0.5s;
+  padding: 15px;
+  font-family: "VT323", monospace;
+}
