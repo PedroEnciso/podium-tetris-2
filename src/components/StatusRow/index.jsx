@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
   transition: background-color 0.5s;
-  padding: 15px;
   font-family: "VT323", monospace;
 `;
 
