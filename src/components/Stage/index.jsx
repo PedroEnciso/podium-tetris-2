@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import Switch from "react-switch";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(useGSAP);
 import style from "./Stage.module.css";
 
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-import background from "../../images/background.jpg";
 import StatusRow from "../StatusRow";
 import GameOverController from "../GameOverController";
 
@@ -95,18 +96,7 @@ const Pixel = React.memo(styled.div`
 	`};
 `);
 
-const ContainerStatus = styled.div`
-  /* ${(props) =>
-    !props.$portrait && `height: ${props.$pixelSize * 18 + (18 / 3) * 1}px;`}
-  ${(props) =>
-    props.$portrait && `width: ${props.$pixelSize * 10 + (10 / 3) * 1}px;`}
-  display: flex;
-  flex-direction: ${(props) => (props.$portrait ? "row" : "column")};
-  align-items: center;
-  justify-content: ${(props) =>
-    props.$portrait ? "space-between" : "flex-start"};
-  font-size: ${(props) => props.$pixelSize}px; */
-`;
+const ContainerStatus = styled.div``;
 
 const getRenderizacaoBloco = (bloco) => {
   let trimRowBloco = [];
@@ -179,6 +169,10 @@ const Stage = ({
   }, [theme3d]);
 
   const { gameMode } = useGameMode();
+  const gameModeLgRef = useRef();
+  const gameModeSmRef = useRef();
+  const tl = useRef();
+  useGsapHook(tl, gameModeLgRef, gameModeSmRef, status.score, gameMode);
 
   return (
     <>
@@ -225,14 +219,18 @@ const Stage = ({
                 className={`${style.mode_container} ${style.small_container}`}
               >
                 <p className={style.mode_title}>MODE</p>
-                <p className={style.mode}>{gameMode}</p>
+                <p className={style.mode} ref={gameModeSmRef}>
+                  {gameMode}
+                </p>
               </div>
             </ContainerNext>
           )}
-          <div class={style.stage_mode_container}>
+          <div className={style.stage_mode_container}>
             <div className={`${style.mode_container} ${style.large_container}`}>
               <p className={style.mode_title}>MODE</p>
-              <p className={style.mode}>{gameMode}</p>
+              <p className={style.mode} ref={gameModeLgRef}>
+                {gameMode}
+              </p>
             </div>
             {map && (
               <div
@@ -328,3 +326,38 @@ const Stage = ({
 };
 
 export default Stage;
+
+const useGsapHook = (tl, ref1, ref2, score, gameMode) => {
+  useGSAP(
+    () => {
+      if (score === 0) return;
+      tl.current = gsap
+        .timeline()
+        .to(ref1.current, {
+          rotation: -15,
+          scale: 1.75,
+          duration: 0.1,
+        })
+        .to(ref1.current, { rotation: 15, duration: 0.2 })
+        .to(ref1.current, { rotation: -15, duration: 0.2 })
+        .to(ref1.current, { rotation: 15, duration: 0.2 })
+        .to(ref1.current, { rotation: -15, duration: 0.2 })
+        .to(ref1.current, { rotation: 15, duration: 0.2 })
+        .to(ref1.current, { rotation: 0, scale: 1, duration: 0.1 });
+      tl.current = gsap
+        .timeline()
+        .to(ref2.current, {
+          rotation: -15,
+          scale: 1.75,
+          duration: 0.1,
+        })
+        .to(ref2.current, { rotation: 15, duration: 0.2 })
+        .to(ref2.current, { rotation: -15, duration: 0.2 })
+        .to(ref2.current, { rotation: 15, duration: 0.2 })
+        .to(ref2.current, { rotation: -15, duration: 0.2 })
+        .to(ref2.current, { rotation: 15, duration: 0.2 })
+        .to(ref2.current, { rotation: 0, scale: 1, duration: 0.1 });
+    },
+    { dependencies: [gameMode] }
+  );
+};
