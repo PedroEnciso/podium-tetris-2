@@ -178,6 +178,9 @@ const Game = () => {
     console.log(`lines change is ${linesChange}`);
     if (linesChange > 1) {
       handlePopUpRows(linesChange);
+    } else {
+      // TEST ONLY
+      handlePopUpRows(linesChange);
     }
     // re-assign previous lines
     prevLinesRef.current = lines;
