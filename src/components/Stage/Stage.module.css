@@ -21,7 +21,7 @@
 }
 
 .container_next {
-  width: 100%;
+  width: var(--stage-width);
   height: calc(var(--next-pixel-size) * 5);
   padding: 1rem;
   background-color: black;
@@ -125,7 +125,7 @@
 }
 
 .status_container {
-  width: 100%;
+  width: var(--stage-width);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
