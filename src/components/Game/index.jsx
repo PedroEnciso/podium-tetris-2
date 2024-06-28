@@ -13,10 +13,6 @@ import { usePopUpContext } from "../../context/pop-up-context";
 import { useServer } from "../../hooks/useServer";
 import { useUserContext } from "../../context/user-context";
 
-//TODO: Alterar OnClick (rotatePlayer) para OnFastClick (criar hook)
-//TODO: Organização do componente "Game" (Separar codigo em hooks, outros components e funcoes)
-//TODO: Dar um tempo quando o bloco estiver no chão, mas o usuário mexendo
-
 const STAGE_HEIGHT = 18;
 const STAGE_WIDTH = 10;
 
@@ -459,20 +455,22 @@ const Game = () => {
       const FORCE_THRESHOLD = 1;
       if (down) {
         if (Math.abs(mx - dragX) > THRESHOLD) {
-          if (mx - dragX > 0)
+          if (mx - dragX > 0) {
+            incrementKeyPress();
             setPlayer((player) => ({
               ...player,
               pos: getNewPlayerPos(gameMode === "inverted" ? "left" : "right"),
               // pos: getNewPlayerPos("right"),
             }));
-          else
+          } else {
+            incrementKeyPress();
             setPlayer((player) => ({
               ...player,
               pos: getNewPlayerPos(gameMode === "inverted" ? "right" : "left"),
               // pos: getNewPlayerPos("left"),
             }));
+          }
           setDragX(mx);
-          incrementKeyPress();
         }
         if (Math.abs(my - dragY) > THRESHOLD) {
           if (velocity > FORCE_THRESHOLD) {
