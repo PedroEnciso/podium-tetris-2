@@ -22,6 +22,7 @@
 
 .container_next {
   width: 100%;
+  height: calc(var(--next-pixel-size) * 5);
   padding: 1rem;
   background-color: black;
   border: 2px solid white;
@@ -74,6 +75,9 @@
 
 .small_container {
   display: flex;
+  font-size: 0.9rem;
+  word-spacing: 100%;
+  width: 50%;
 }
 
 .large_container {

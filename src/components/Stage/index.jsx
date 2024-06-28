@@ -218,7 +218,7 @@ const Stage = ({
               <div
                 className={`${style.mode_container} ${style.small_container}`}
               >
-                <p className={style.mode_title}>MODE</p>
+                {/* <p className={style.mode_title}>MODE</p> */}
                 <p className={style.mode} ref={gameModeSmRef}>
                   {gameMode}
                 </p>
