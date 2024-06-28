@@ -184,7 +184,7 @@ const Game = () => {
   }, [lines]);
 
   const restartGame = () => {
-    setMap(initialMap); //TODO: lose game
+    setMap(initialMap);
     setlines(0);
     setScore(0);
     setLevel(1);
@@ -472,6 +472,7 @@ const Game = () => {
               // pos: getNewPlayerPos("left"),
             }));
           setDragX(mx);
+          incrementKeyPress();
         }
         if (Math.abs(my - dragY) > THRESHOLD) {
           if (velocity > FORCE_THRESHOLD) {
