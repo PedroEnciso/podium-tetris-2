@@ -16,8 +16,6 @@ export function PopUpContextProvider({ children }) {
   }
 
   function handlePopUpScore(prevScore, score) {
-    setAthlete("ronaldo");
-    setTimeout(() => setAthlete(null), 2000);
     if (score >= 6000 && score < 6400) {
       setAthlete("messi");
       setTimeout(() => setAthlete(null), 2000);
