@@ -36,15 +36,22 @@
 
 .athlete_container {
   position: absolute;
-  /* background-color: black; */
-  /* border: 1px solid #c026d3; */
+  background-color: black;
+  border: 1px solid #c026d3;
   border-radius: 10px;
   font-size: 2rem;
-  width: 250px;
+  width: 45%;
+  max-width: 250px;
   text-align: center;
   padding: 1.5rem;
   color: white;
   z-index: 10000;
+}
+
+@media screen and (min-width: 768px) {
+  .athlete_container {
+    width: 250px;
+  }
 }
 
 .athlete_container img {
