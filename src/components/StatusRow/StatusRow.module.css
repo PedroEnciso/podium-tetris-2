@@ -3,3 +3,15 @@
   padding: 15px;
   font-family: "VT323", monospace;
 }
+
+.score {
+  color: var(--red);
+}
+
+.level {
+  color: var(--green);
+}
+
+.lines {
+  color: var(--blue);
+}

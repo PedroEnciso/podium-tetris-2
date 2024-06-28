@@ -121,7 +121,8 @@
 .mode {
   font-size: 2rem;
   text-transform: uppercase;
-  color: #c026d3;
+  text-shadow: 0px 2px var(--green);
+  color: var(--blue);
 }
 
 .status_container {

@@ -15,8 +15,8 @@
   /* font-family: "Press Start 2P", system-ui; */
   font-size: 7rem;
   text-align: center;
-  text-shadow: 0px 8px #6d28d9;
-  color: #c026d3;
+  text-shadow: 0px 8px var(--red);
+  color: var(--orange);
 }
 
 .button {
@@ -28,8 +28,8 @@
   padding: 50px 0px;
   text-decoration: blink solid white;
   animation: blinker 3s linear infinite;
-  text-shadow: 0px 4px #6d28d9;
-  color: #c026d3;
+  text-shadow: 0px 4px var(--red);
+  color: var(--orange);
 }
 
 @media screen and (min-width: 768px) {
@@ -39,7 +39,7 @@
 }
 
 .copywrite {
-  color: #c026d3;
+  color: var(--orange);
   font-size: 1.2rem;
 }
 

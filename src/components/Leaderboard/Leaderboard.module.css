@@ -62,11 +62,11 @@
 }
 
 .current {
-  color: #c026d3;
+  color: var(--green);
 }
 
 .btn_shadow {
-  text-shadow: 0px 3px #6d28d9;
+  text-shadow: 0px 3px var(--red);
 }
 
 .center {
@@ -76,7 +76,7 @@
 
 .error {
   text-align: center;
-  color: red;
+  color: var(--red);
   font-size: 1.25rem;
   margin-top: 1rem;
 }

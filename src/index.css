@@ -8,21 +8,35 @@
 html {
   overflow: hidden;
   width: 100%;
+
+  /* colors */
+  --green: #a9f08b;
+  --red: #ec3b43;
+  --blue: #56d0f4;
+  --orange: #f49d3f;
+  --purple: #975da9;
 }
 
 body {
   height: 100%;
   height: 100vh;
   height: 100dvh;
-  /* position: fixed; */
   /* prevent overscroll bounce*/
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  background-image: url("./images/moon.jpg");
+  background-image: url("./images/bg-podium-2.webp");
   background-size: cover;
   background-position: top;
+  background-repeat: no-repeat;
   background-color: #041929;
   font-family: "VT323", monospace;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    background-size: contain;
+    background-repeat: repeat;
+  }
 }
 
 #root {
@@ -42,7 +56,7 @@ body {
 
 .btn {
   font-family: "VT323", monospace;
-  color: #c026d3;
+  color: var(--orange);
   font-size: 3rem;
   border: none;
   background-color: transparent;

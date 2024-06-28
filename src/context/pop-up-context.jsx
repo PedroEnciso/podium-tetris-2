@@ -7,7 +7,6 @@ const PopUpContext = React.createContext();
 
 export function PopUpContextProvider({ children }) {
   const [rows, setRows] = React.useState(0);
-  // messi
   const [athlete, setAthlete] = React.useState(null);
 
   function handlePopUpRows(rows) {
