@@ -88,7 +88,9 @@ export const useServer = (type) => {
             : "There was an issue. Please try again."
         );
       }
-      setData(await response.json());
+      const data = await response.json();
+      console.log("response data", data);
+      setData(data);
     } catch (error) {
       setError(error.message);
     }
