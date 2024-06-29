@@ -90,7 +90,8 @@ export const useServer = (type) => {
       }
       const data = await response.json();
       console.log("response data", data);
-      setData(data);
+      console.log("setting data as", data.result.data);
+      setData(data.result.data);
     } catch (error) {
       setError(error.message);
     }
