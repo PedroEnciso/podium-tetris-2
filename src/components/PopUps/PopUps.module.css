@@ -43,10 +43,12 @@
   font-size: 2rem;
   width: 45%;
   max-width: 250px;
+  height: fit-content;
   text-align: center;
   padding: 1.5rem;
   color: white;
   z-index: 10000;
+  text-transform: uppercase;
 }
 
 @media screen and (min-width: 768px) {

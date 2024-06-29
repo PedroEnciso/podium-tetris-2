@@ -15,19 +15,43 @@ export function PopUpContextProvider({ children }) {
   }
 
   function handlePopUpScore(prevScore, score) {
-    if (score >= 6000 && score < 6400) {
-      setAthlete("messi");
-      setTimeout(() => setAthlete(null), 2000);
-    } else if (score >= 6400 && prevScore < 6000) {
-      setAthlete("messi");
+    if (score >= 5000 && prevScore < 5000) {
+      setAthlete("brooke");
       setTimeout(() => setAthlete(null), 2000);
     }
 
-    if (score >= 12000 && score < 12400) {
-      setAthlete("ronaldo");
+    if (score >= 15000 && prevScore < 15000) {
+      setAthlete("craig");
       setTimeout(() => setAthlete(null), 2000);
-    } else if (score >= 12400 && prevScore < 12000) {
-      setAthlete("ronaldo");
+    }
+
+    if (score >= 50000 && prevScore < 50000) {
+      setAthlete("emma");
+      setTimeout(() => setAthlete(null), 2000);
+    }
+
+    if (score >= 75000 && prevScore < 75000) {
+      setAthlete("heber");
+      setTimeout(() => setAthlete(null), 2000);
+    }
+
+    if (score >= 100000 && prevScore < 100000) {
+      setAthlete("justin");
+      setTimeout(() => setAthlete(null), 2000);
+    }
+
+    if (score >= 200000 && prevScore < 200000) {
+      setAthlete("kels");
+      setTimeout(() => setAthlete(null), 2000);
+    }
+
+    if (score >= 300000 && prevScore < 300000) {
+      setAthlete("mars");
+      setTimeout(() => setAthlete(null), 2000);
+    }
+
+    if (score >= 400000 && prevScore < 400000) {
+      setAthlete("mat");
       setTimeout(() => setAthlete(null), 2000);
     }
 
