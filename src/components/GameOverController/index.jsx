@@ -6,9 +6,6 @@ import { useUserContext } from "../../context/user-context";
 import { useServer } from "../../hooks/useServer";
 
 function GameOverController({ restartClick, status }) {
-  // can be 'game over' | 'new high score' | 'leaderboard'
-  const [currentScreen, setCurrentScreen] = useState("game over");
-  const [playerName, setPlayerName] = useState(null);
   const { userId, gameId } = useUserContext();
   const LEADERBOARD_THRESHOLD = 5;
 
@@ -38,9 +35,8 @@ function GameOverController({ restartClick, status }) {
   function postHighScore(name) {
     // submit the user's high score
     console.log(`submitting score of ${status.score} for ${name}`);
-    setPlayerName(name);
     // change the screen to display the leaderboard
-    submitHighScore({ ScoreId: dataGameOver.id, CustomerId: userId, name });
+    submitHighScore({ gameId, name, score: status.score, CustomerId: userId });
   }
 
   useEffect(() => {
