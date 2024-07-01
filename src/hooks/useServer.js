@@ -53,6 +53,7 @@ export const useServer = (type) => {
       break;
     case "highScore":
       URL = `${BASE_URL}/saveScoreToLeaderboard`;
+      break;
     case "scoreboard":
       URL = `${BASE_URL}/scoreboard`;
       METHOD = "GET";
