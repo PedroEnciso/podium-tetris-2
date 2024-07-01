@@ -26,8 +26,8 @@ const Leaderboard = ({ restartClick, rank, threshold, score }) => {
             <p className={style.top_row_item}>NAME</p>
             <p className={style.top_row_item}>SCORE</p>
           </div>
-          {data && data.scores.length > 0
-            ? data.scores.map((leader) => {
+          {data && data.length > 0
+            ? data.map((leader) => {
                 let isPlayerScore = leader.rank === rank;
                 return (
                   <div
