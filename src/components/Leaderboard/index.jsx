@@ -36,7 +36,7 @@ const Leaderboard = ({ restartClick, rank, threshold, score }) => {
                       isPlayerScore ? `${style.current}` : ""
                     }`}
                   >
-                    <p>{leader.rank}</p>
+                    <p>{leader.place}</p>
                     <p>{leader.name}</p>
                     <p>{leader.score}</p>
                   </div>
