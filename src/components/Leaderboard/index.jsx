@@ -5,6 +5,11 @@ import { useServer } from "../../hooks/useServer";
 const Leaderboard = ({ restartClick, rank, threshold, score }) => {
   const { postRequest: getScoreboard, error, data } = useServer("scoreboard");
 
+  if (data) {
+    console.log("leaderboard data", data);
+    console.log("rank prop", rank);
+  }
+
   useEffect(() => {
     getScoreboard();
   }, []);
