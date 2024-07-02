@@ -28,10 +28,10 @@ const Leaderboard = ({ restartClick, rank, threshold, score }) => {
           </div>
           {data && data.length > 0
             ? data.map((leader) => {
-                let isPlayerScore = leader.rank === rank;
+                let isPlayerScore = leader.place === rank;
                 return (
                   <div
-                    key={leader.rank}
+                    key={leader.place}
                     className={`${style.subgrid} ${style.right_align} ${
                       isPlayerScore ? `${style.current}` : ""
                     }`}
