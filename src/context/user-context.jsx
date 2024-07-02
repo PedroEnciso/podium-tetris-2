@@ -3,6 +3,8 @@ import { useServer } from "../hooks/useServer";
 
 const UserContext = React.createContext();
 
+const USERS = [1234, 5678, 9123, 4567];
+
 export function UserContextProvider({ children }) {
   const [userId, setUserId] = React.useState(null);
   const {
@@ -15,7 +17,9 @@ export function UserContextProvider({ children }) {
 
   React.useEffect(() => {
     // get user on load
-    setUserId(1234);
+    const user = USERS[Math.floor(Math.random() * 4)];
+    console.log("user id", user);
+    setUserId(user);
     // fetch the game id
     getGameId();
   }, []);
