@@ -15,7 +15,7 @@ export function UserContextProvider({ children }) {
 
   React.useEffect(() => {
     // get user on load
-    setUserId("1234");
+    setUserId(1234);
     // fetch the game id
     getGameId();
   }, []);
