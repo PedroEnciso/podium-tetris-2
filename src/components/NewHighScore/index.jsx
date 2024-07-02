@@ -7,8 +7,6 @@ function NewHighScore({ onSubmit, place, userId, score, isLoading, error }) {
   const [name, setName] = useState("");
   const { getPlace } = useGetPlace();
 
-  console.log("place", place);
-
   function submit(e) {
     e.preventDefault();
     onSubmit(name);
