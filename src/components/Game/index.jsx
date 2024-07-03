@@ -247,6 +247,8 @@ const Game = () => {
         const mapCleared = checkMap(mapWithPlayer);
         return mapCleared;
       });
+      // attempted fix for double block down on mobile
+      setSpaceReleased(true);
       const newPlayer = getRandomPlayer(player);
       if (!validatePosition(newPlayer.pos, newPlayer.bloco)) loseGame();
       return newPlayer;
