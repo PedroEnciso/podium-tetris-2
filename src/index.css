@@ -5,6 +5,7 @@
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-callout: none;
+  -webkit-highlight: none;
 }
 
 html {
