@@ -21,6 +21,7 @@ export function UserContextProvider({ children }) {
 
   function savePlayerNameToLocalStorage(name) {
     localStorage.setItem("playerName", name);
+    setPlayerName(name);
   }
 
   React.useEffect(() => {
