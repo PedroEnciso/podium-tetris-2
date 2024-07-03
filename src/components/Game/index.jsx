@@ -247,8 +247,6 @@ const Game = () => {
         const mapCleared = checkMap(mapWithPlayer);
         return mapCleared;
       });
-      // attempted fix for double block down on mobile
-      setSpaceReleased(true);
       const newPlayer = getRandomPlayer(player);
       if (!validatePosition(newPlayer.pos, newPlayer.bloco)) loseGame();
       return newPlayer;
@@ -452,7 +450,7 @@ const Game = () => {
   }, [player, calculateHintPlayer]);
 
   const bind = useDrag(
-    ({ down, movement: [mx, my], velocity }) => {
+    ({ down, movement: [mx, my], velocity, cancel }) => {
       const THRESHOLD = 20;
       const FORCE_THRESHOLD = 1;
       if (down) {
@@ -479,6 +477,8 @@ const Game = () => {
             if (spaceReleased) {
               setSpaceReleased(false);
               forwardDown();
+              // attempted fix, use cancel to prevent double drop
+              cancel();
             }
           } else if (my - dragY > 0) drop();
           setDragY(my);
