@@ -3,6 +3,8 @@
   padding: 0;
   margin: 0;
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-callout: none;
 }
 
 html {
