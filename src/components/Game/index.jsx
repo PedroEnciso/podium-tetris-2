@@ -477,10 +477,12 @@ const Game = () => {
             if (spaceReleased) {
               setSpaceReleased(false);
               forwardDown();
-              // attempted fix, use cancel to prevent double drop
-              cancel();
             }
-          } else if (my - dragY > 0) drop();
+          } else if (my - dragY > 0) {
+            drop();
+            // attempted fix, use cancel to prevent double drop
+            cancel();
+          }
           setDragY(my);
         }
       } else {
