@@ -39,7 +39,7 @@ const Leaderboard = ({
                   <div
                     key={leader.place}
                     className={`${style.subgrid} ${style.right_align} ${
-                      isPlayerScore ? `${style.current}` : ""
+                      isPlayerScore && isNewHighScore ? `${style.current}` : ""
                     }`}
                   >
                     <p>{leader.place}</p>
@@ -49,12 +49,12 @@ const Leaderboard = ({
                 );
               })
             : null}
-          {isNewHighScore ? (
+          {!isNewHighScore ? (
             <div
               className={`${style.subgrid} ${style.right_align} ${style.current}`}
             >
               <p></p>
-              <p>YOU</p>
+              <p>{name}</p>
               <p>{score}</p>
             </div>
           ) : null}
