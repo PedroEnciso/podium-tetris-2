@@ -28,7 +28,7 @@ export function UserContextProvider({ children }) {
   React.useEffect(() => {
     // get user on load
     const user = USERS[Math.floor(Math.random() * 4)];
-    setUserId(user);
+    setUserId(1324232);
     // fetch the game id
     getGameId();
     // set the player name
