@@ -1,11 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import LoginForm from "./LoginForm";
 import style from "./NewHighScore.module.css";
 
-function NewHighScore({ onSubmit, place, userId, score, isLoading, error }) {
+function NewHighScore({
+  onSubmit,
+  userId,
+  score,
+  isLoading,
+  error,
+  playerName,
+}) {
   const [name, setName] = useState("");
-  const { getPlace } = useGetPlace();
+
+  useEffect(() => {
+    if (playerName) {
+      setName(playerName);
+    }
+  }, []);
 
   function submit(e) {
     e.preventDefault();
@@ -25,15 +37,11 @@ function NewHighScore({ onSubmit, place, userId, score, isLoading, error }) {
         <div className={style.container}>
           <form onSubmit={submit} className={style.form}>
             <div>
-              <p className={style.title}>NEW HIGH SCORE!</p>
+              <p className={style.title}>YOUR SCORE</p>
               <p className={style.score}>{score}</p>
             </div>
-            <div>
-              <p className={style.text}>You placed</p>
-              <p className={style.place}>{getPlace(place)}</p>
-            </div>
             {userId ? (
-              <div>
+              <div className={style.input_container}>
                 <input
                   onChange={handleNameChange}
                   type="text"
@@ -55,7 +63,7 @@ function NewHighScore({ onSubmit, place, userId, score, isLoading, error }) {
                 disabled={isDisabled}
                 className={`${style.btn_shadow} btn blink`}
               >
-                {isLoading ? "SUBMITTING" : "SUBMIT"}
+                {isLoading ? "SUBMITTING" : "SUBMIT SCORE"}
               </button>
             ) : (
               <LoginForm onSubmit={onSubmit} />
@@ -67,23 +75,5 @@ function NewHighScore({ onSubmit, place, userId, score, isLoading, error }) {
     </>
   );
 }
-
-const useGetPlace = () => {
-  function getPlace(place) {
-    const lastDigit = place % 10;
-
-    switch (lastDigit) {
-      case 1:
-        return `${place}st`;
-      case 2:
-        return `${place}nd`;
-      case 3:
-        return `${place}rd`;
-      default:
-        return `${place}th`;
-    }
-  }
-  return { getPlace };
-};
 
 export default NewHighScore;

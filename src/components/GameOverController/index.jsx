@@ -6,7 +6,10 @@ import { useUserContext } from "../../context/user-context";
 import { useServer } from "../../hooks/useServer";
 
 function GameOverController({ restartClick, status }) {
-  const { userId, gameId } = useUserContext();
+  const { userId, gameId, savePlayerNameToLocalStorage, playerName } =
+    useUserContext();
+  // score | leaderboard
+  const [screen, setScreen] = useState("score");
   const LEADERBOARD_THRESHOLD = 5;
 
   if (!gameId) {
@@ -20,12 +23,6 @@ function GameOverController({ restartClick, status }) {
   }
 
   const {
-    postRequest: submitGameOver,
-    error: errorGameOver,
-    data: dataGameOver,
-    isLoading: isLoadingGameOver,
-  } = useServer("gameOver");
-  const {
     postRequest: submitHighScore,
     error: errorHighScore,
     data: dataHighScore,
@@ -34,57 +31,32 @@ function GameOverController({ restartClick, status }) {
 
   function postHighScore(name) {
     // submit the user's high score
-    console.log(`submitting score of ${status.score} for ${name}`);
-    // change the screen to display the leaderboard
     submitHighScore({ gameId, name, score: status.score, CustomerId: userId });
+    savePlayerNameToLocalStorage(name);
+    // change the screen to display the leaderboard
+    setScreen("leaderboard");
   }
 
-  useEffect(() => {
-    // submit player scores if id exists
-    if (gameId) {
-      submitGameOver({ gameId });
-    }
-  }, []);
-
-  // show GameOver scenarios
-  if (isLoadingGameOver) {
-    return <GameOver />;
-  }
-
-  //show leaderboard scenarios
-  if (dataHighScore) {
-    return (
-      <Leaderboard
-        restartClick={restartClick}
-        rank={dataGameOver}
-        threshold={LEADERBOARD_THRESHOLD}
-        score={status.score}
-      />
-    );
-  }
-
-  if ((dataGameOver && dataGameOver > LEADERBOARD_THRESHOLD) || errorGameOver) {
-    return (
-      <Leaderboard
-        restartClick={restartClick}
-        rank={dataGameOver}
-        threshold={LEADERBOARD_THRESHOLD}
-        score={status.score}
-      />
-    );
-  }
-
-  // show NewHighScore scenarios
-  if (dataGameOver && dataGameOver <= LEADERBOARD_THRESHOLD) {
-    console.log("new high score", dataGameOver);
+  if (screen === "score") {
     return (
       <NewHighScore
         onSubmit={postHighScore}
         userId={userId}
         score={status.score}
-        place={dataGameOver}
         isLoading={isLoadingHighScore}
         error={errorHighScore}
+        playerName={playerName}
+      />
+    );
+  }
+
+  if (dataHighScore && screen === "leaderboard") {
+    return (
+      <Leaderboard
+        restartClick={restartClick}
+        name={dataHighScore.name}
+        threshold={LEADERBOARD_THRESHOLD}
+        score={status.score}
       />
     );
   }

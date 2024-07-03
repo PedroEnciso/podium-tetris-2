@@ -2,13 +2,8 @@ import { useEffect } from "react";
 import style from "./Leaderboard.module.css";
 import { useServer } from "../../hooks/useServer";
 
-const Leaderboard = ({ restartClick, rank, threshold, score }) => {
+const Leaderboard = ({ restartClick, name, threshold, score }) => {
   const { postRequest: getScoreboard, error, data } = useServer("scoreboard");
-
-  if (data) {
-    console.log("leaderboard data", data);
-    console.log("rank prop", rank);
-  }
 
   useEffect(() => {
     getScoreboard();
@@ -32,8 +27,8 @@ const Leaderboard = ({ restartClick, rank, threshold, score }) => {
             <p className={style.top_row_item}>SCORE</p>
           </div>
           {data && data.length > 0
-            ? data.map((leader) => {
-                let isPlayerScore = leader.place === rank;
+            ? data.slice(0, threshold).map((leader) => {
+                let isPlayerScore = leader.name === name;
                 return (
                   <div
                     key={leader.place}

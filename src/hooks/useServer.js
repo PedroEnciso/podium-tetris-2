@@ -1,40 +1,3 @@
-// export function useServer() {
-//   const URL = "http://localhost:5173/";
-//   // sends updates to the server after every score change
-//   // lets server calculate the score independently
-//   async function updateScore(lines, level) {
-//     try {
-//       const response = await fetch(`${URL}/score/update`, {
-//         method: "POST",
-//         body: {
-//           lines,
-//           level,
-//         },
-//       });
-//       console.log("update score response", response);
-//     } catch (error) {
-//       console.log("found an error", error.message);
-//     }
-//   }
-
-//   async function submitGameOver(score, CustomerId) {
-//     try {
-//       const response = await fetch(`${URL}/score/gameOver`, {
-//         method: "POST",
-//         body: {
-//           score,
-//           CustomerId,
-//         },
-//       });
-//       console.log("update game over", response);
-//     } catch (error) {
-//       console.log("found an error", error.message);
-//     }
-//   }
-
-//   return { updateScore, submitGameOver };
-// }
-
 import { useState } from "react";
 
 export const useServer = (type) => {
@@ -85,13 +48,12 @@ export const useServer = (type) => {
         console.log("error", responseData.error.message);
         throw new Error(
           response.status === 406
-            ? responseData.message
+            ? responseData.error.message
             : "There was an issue. Please try again."
         );
       }
       const data = await response.json();
-      console.log("response data", data);
-      console.log("setting data as", data.result.data);
+      console.log("data", data.result.data);
       setData(data.result.data);
     } catch (error) {
       setError(error.message);

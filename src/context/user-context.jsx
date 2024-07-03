@@ -7,6 +7,7 @@ const USERS = [1234, 5678, 9123, 4567];
 
 export function UserContextProvider({ children }) {
   const [userId, setUserId] = React.useState(null);
+  const [playerName, setPlayerName] = React.useState(null);
   const {
     postRequest: getGameId,
     data: gameId,
@@ -15,25 +16,38 @@ export function UserContextProvider({ children }) {
     resetData: resetGameId,
   } = useServer("startGame");
 
+  // localStorage functions for player name
+  function getPlayerNameFromLocalStorage() {
+    return localStorage.getItem("playerName");
+  }
+
+  function savePlayerNameToLocalStorage(name) {
+    localStorage.setItem("playerName", name);
+  }
+
   React.useEffect(() => {
     // get user on load
     const user = USERS[Math.floor(Math.random() * 4)];
-    console.log("user id", user);
     setUserId(user);
     // fetch the game id
     getGameId();
+    // set the player name
+    setPlayerName(getPlayerNameFromLocalStorage());
   }, []);
 
   function getNewGameId() {
     resetGameId();
     getGameId();
   }
-  // log error
-  if (errorGameId) {
-    console.log("error", errorGameId);
-  }
 
-  const value = { userId, gameId, getNewGameId, errorGameId };
+  const value = {
+    userId,
+    gameId,
+    getNewGameId,
+    errorGameId,
+    savePlayerNameToLocalStorage,
+    playerName,
+  };
 
   return (
     <UserContext.Provider value={value}>
