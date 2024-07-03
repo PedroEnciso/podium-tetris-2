@@ -46,11 +46,7 @@ export const useServer = (type) => {
       if (!response.ok) {
         const responseData = await response.json();
         console.log("error", responseData.error.message);
-        throw new Error(
-          response.status === 406
-            ? responseData.error.message
-            : "There was an issue. Please try again."
-        );
+        throw new Error(responseData.error.message);
       }
       const data = await response.json();
       console.log("data", data.result.data);
