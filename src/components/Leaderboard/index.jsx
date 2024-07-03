@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import style from "./Leaderboard.module.css";
 import { useServer } from "../../hooks/useServer";
 
-const Leaderboard = ({ restartClick, name, threshold, score }) => {
+const Leaderboard = ({
+  restartClick,
+  name,
+  threshold,
+  score,
+  isNewHighScore,
+}) => {
   const { postRequest: getScoreboard, error, data } = useServer("scoreboard");
 
   useEffect(() => {
@@ -43,11 +49,11 @@ const Leaderboard = ({ restartClick, name, threshold, score }) => {
                 );
               })
             : null}
-          {rank > threshold || !rank ? (
+          {isNewHighScore ? (
             <div
               className={`${style.subgrid} ${style.right_align} ${style.current}`}
             >
-              <p>{rank}</p>
+              <p></p>
               <p>YOU</p>
               <p>{score}</p>
             </div>
