@@ -55,6 +55,7 @@ function GameOverController({ restartClick, status }) {
         name={dataHighScore.name}
         threshold={LEADERBOARD_THRESHOLD}
         score={status.score}
+        isNewHighScore={dataHighScore.newHighScore}
       />
     );
   }
