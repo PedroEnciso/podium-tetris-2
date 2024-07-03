@@ -33,11 +33,9 @@ function GameOverController({ restartClick, status }) {
     // submit the user's high score
     submitHighScore({ gameId, name, score: status.score, CustomerId: userId });
     savePlayerNameToLocalStorage(name);
-    // change the screen to display the leaderboard
-    setScreen("leaderboard");
   }
 
-  if (screen === "score") {
+  if (screen === "score" || errorHighScore || isLoadingHighScore) {
     return (
       <NewHighScore
         onSubmit={postHighScore}
@@ -48,6 +46,9 @@ function GameOverController({ restartClick, status }) {
         playerName={playerName}
       />
     );
+  } else {
+    // change the screen to display the leaderboard
+    setScreen("leaderboard");
   }
 
   if (dataHighScore && screen === "leaderboard") {
