@@ -33,6 +33,7 @@ body {
   /* prevent select while swiping on mobile */
   user-select: none;
   -webkit-user-select: none;
+  -webkit-user-callout: none;
 }
 
 @media screen and (min-width: 768px) {
