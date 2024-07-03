@@ -480,7 +480,7 @@ const Game = () => {
             }
           } else if (my - dragY > 0) {
             drop();
-            // attempted fix, use cancel to prevent double drop
+            // use cancel to prevent double drop
             cancel();
           }
           setDragY(my);
