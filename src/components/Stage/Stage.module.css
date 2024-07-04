@@ -2,6 +2,10 @@
   --pixel-size: clamp(25px, calc(60vh / 18), 40px);
   --next-pixel-size: 20px;
   --stage-width: calc(var(--pixel-size) * 10);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-callout: none;
+  -webkit-highlight: none;
 }
 
 .game_inside_container {
