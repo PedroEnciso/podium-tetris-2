@@ -462,6 +462,19 @@ const Game = () => {
           setSpaceReleased(true);
           return;
         }
+        if (keyPresses > 9 && isSidewaysMove) {
+          const newBloco = getRandomBloco();
+          // check if the new block is valid in the current player's position and different than current block before switching
+          if (
+            validatePosition(player.pos, newBloco) &&
+            player.bloco.color !== newBloco.color
+          ) {
+            // calculate the hint for the new bloco
+            setPlayer({ ...player, bloco: newBloco });
+            resetKeyPresses();
+            return;
+          }
+        }
         if (Math.abs(mx - dragX) > THRESHOLD) {
           if (mx - dragX > 0) {
             incrementKeyPress();
