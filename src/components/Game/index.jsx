@@ -474,11 +474,13 @@ const Game = () => {
         }
         if (Math.abs(my - dragY) > THRESHOLD) {
           if (velocity > FORCE_THRESHOLD) {
+            if (!spaceReleased) {
+              // use cancel to prevent double drop
+              cancel();
+            }
             if (spaceReleased) {
               setSpaceReleased(false);
               forwardDown();
-              // use cancel to prevent double drop
-              cancel();
             }
           } else if (my - dragY > 0) {
             drop();
