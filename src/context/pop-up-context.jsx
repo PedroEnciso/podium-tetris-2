@@ -33,7 +33,10 @@ export function PopUpContextProvider({ children }) {
       return;
     }
 
+    console.log(score, threshold);
+
     if (score >= threshold && prevScore < threshold) {
+      console.log("setting athlete!");
       setThreshold((prev) => prev * 2);
       const randomIndex = Math.floor(Math.random() * 8);
       setAthlete(ATHLETES[randomIndex]);
