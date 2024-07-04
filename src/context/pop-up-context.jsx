@@ -5,9 +5,21 @@ import AthletePopUp from "../components/PopUps/AthletePopUp";
 
 const PopUpContext = React.createContext();
 
+const ATHLETES = [
+  "brooke",
+  "craig",
+  "emma",
+  "heber",
+  "justin",
+  "kels",
+  "mars",
+  "mat",
+];
+
 export function PopUpContextProvider({ children }) {
   const [rows, setRows] = React.useState(0);
   const [athlete, setAthlete] = React.useState(null);
+  const [threshold, setThreshold] = React.useState(1000);
 
   function handlePopUpRows(rows) {
     setRows(rows);
@@ -15,48 +27,16 @@ export function PopUpContextProvider({ children }) {
   }
 
   function handlePopUpScore(prevScore, score) {
-    if (score >= 5000 && prevScore < 5000) {
-      setAthlete("brooke");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
-    if (score >= 15000 && prevScore < 15000) {
-      setAthlete("craig");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
-    if (score >= 50000 && prevScore < 50000) {
-      setAthlete("emma");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
-    if (score >= 75000 && prevScore < 75000) {
-      setAthlete("heber");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
-    if (score >= 100000 && prevScore < 100000) {
-      setAthlete("justin");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
-    if (score >= 200000 && prevScore < 200000) {
-      setAthlete("kels");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
-    if (score >= 300000 && prevScore < 300000) {
-      setAthlete("mars");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
-    if (score >= 400000 && prevScore < 400000) {
-      setAthlete("mat");
-      setTimeout(() => setAthlete(null), 2000);
-    }
-
     if (score === -1) {
       setAthlete("cheat");
+      setTimeout(() => setAthlete(null), 2000);
+      return;
+    }
+
+    if (score >= threshold && prevScore < threshold) {
+      setThreshold((prev) => prev * 2);
+      const randomIndex = Math.floor(Math.random() * 8);
+      setAthlete(ATHLETES[randomIndex]);
       setTimeout(() => setAthlete(null), 2000);
     }
   }
