@@ -477,6 +477,9 @@ const Game = () => {
             if (!spaceReleased) {
               // use cancel to prevent double drop
               cancel();
+              setDragX(0);
+              setDragY(0);
+              setSpaceReleased(true);
             }
             if (spaceReleased) {
               setSpaceReleased(false);
