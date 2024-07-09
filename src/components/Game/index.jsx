@@ -454,14 +454,6 @@ const Game = () => {
       const THRESHOLD = 20;
       const FORCE_THRESHOLD = 1;
       if (down) {
-        // if (!spaceReleased) {
-        //   // use cancel to prevent double drop
-        //   cancel();
-        //   setDragX(0);
-        //   setDragY(0);
-        //   setSpaceReleased(true);
-        //   return;
-        // }
         if (Math.abs(mx - dragX) > THRESHOLD) {
           if (mx - dragX > 0) {
             incrementKeyPress();
@@ -494,19 +486,17 @@ const Game = () => {
           setDragX(mx);
         }
         if (Math.abs(my - dragY) > THRESHOLD) {
-          // possible fix
-          if (!spaceReleased) {
-            cancel();
-            setDragX(0);
-            setDragY(0);
-            setSpaceReleased(true);
-            return;
-          } else if (velocity > FORCE_THRESHOLD) {
+          console.log("my", my);
+          console.log("dragy", dragY);
+          console.log("velocity", velocity);
+          if (velocity > FORCE_THRESHOLD) {
             if (spaceReleased) {
+              console.log("releasing block");
               setSpaceReleased(false);
               forwardDown();
             }
           } else if (my - dragY > 0) {
+            console.log("drop");
             drop();
           }
           setDragY(my);
