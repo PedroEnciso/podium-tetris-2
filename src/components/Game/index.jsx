@@ -485,6 +485,8 @@ const Game = () => {
           setDragX(mx);
         }
         if (Math.abs(my - dragY) > THRESHOLD) {
+          // fix attempt:
+          // it seems like dragY is not able to update on some occasions. set it before calling forwardDown and drop
           if (velocity > FORCE_THRESHOLD) {
             if (spaceReleased) {
               console.log("my", my);
@@ -492,14 +494,17 @@ const Game = () => {
               console.log("velocity", velocity);
               console.log("releasing block");
               console.log(player.bloco.color);
+              setDragY(my);
               setSpaceReleased(false);
               forwardDown();
             }
           } else if (my - dragY > 0) {
             console.log("drop");
+            setDragY(my);
             drop();
+          } else {
+            setDragY(my);
           }
-          setDragY(my);
         }
       } else {
         setDragX(0);
