@@ -27,9 +27,9 @@ body {
   /* prevent overscroll bounce*/
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  background-image: url("./images/bg-podium-2.webp");
+  background-image: url("./images/tetris-background.png");
   background-size: cover;
-  background-position: top;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: #041929;
   font-family: "VT323", monospace;
@@ -37,13 +37,6 @@ body {
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-callout: none;
-}
-
-@media screen and (min-width: 768px) {
-  body {
-    background-size: contain;
-    background-repeat: repeat;
-  }
 }
 
 #root {

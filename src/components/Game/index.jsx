@@ -552,23 +552,36 @@ const useKeyStrokeLogger = () => {
   const [keys, setKeys] = useState([]);
   const [cheatIsActive, setCheatIsActive] = useState(false);
   const { handlePopUpScore } = usePopUpContext();
-  const TARGET = ["up", "up", "down", "down", "left", "right", "a", "b"];
+  const TARGET = [
+    "up",
+    "up",
+    "down",
+    "down",
+    "left",
+    "right",
+    "left",
+    "right",
+    "b",
+    "a",
+  ];
 
   function logNewKey(newKey) {
     let copyArray = [...keys];
     // check if the log array has length 8
-    if (keys.length === 8) {
+    if (keys.length === TARGET.length) {
       // if it does, remove the first element of the array
       copyArray.shift();
     }
     // add the new key to the end of the array
     copyArray = [...copyArray, newKey];
+
     // check if the array matches the target array
     if (copyArray.length === TARGET.length) {
       const correctKeyStrokes = TARGET.filter(
         (item, index) => item === copyArray[index]
       );
-      if (correctKeyStrokes.length === 8) {
+
+      if (correctKeyStrokes.length === TARGET.length) {
         // if it does, set state to true
         setCheatIsActive(true);
         // activate the pop up
