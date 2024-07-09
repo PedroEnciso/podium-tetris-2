@@ -491,6 +491,7 @@ const Game = () => {
               console.log("dragy", dragY);
               console.log("velocity", velocity);
               console.log("releasing block");
+              console.log(player.bloco.color);
               setSpaceReleased(false);
               forwardDown();
             }
