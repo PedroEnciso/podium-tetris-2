@@ -37,12 +37,6 @@
   ],
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.0",
-    "msw": "^2.3.1",
     "vite": "^5.2.12"
-  },
-  "msw": {
-    "workerDirectory": [
-      "public"
-    ]
   }
 }

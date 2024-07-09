@@ -6,6 +6,7 @@
   -webkit-user-select: none;
   -webkit-user-callout: none;
   -webkit-highlight: none;
+  font-family: "VT323", monospace;
 }
 
 html {
@@ -27,7 +28,7 @@ body {
   /* prevent overscroll bounce*/
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  background-image: url("./images/tetris-background.png");
+  background-image: url("/assets/images/tetris-background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

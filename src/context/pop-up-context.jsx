@@ -2,19 +2,9 @@ import React from "react";
 import { createPortal } from "react-dom";
 import RowsPopUp from "../components/PopUps/RowsPopUp";
 import AthletePopUp from "../components/PopUps/AthletePopUp";
+import { ATHLETES } from "../constants";
 
 const PopUpContext = React.createContext();
-
-const ATHLETES = [
-  "brooke",
-  "craig",
-  "emma",
-  "heber",
-  "justin",
-  "kels",
-  "mars",
-  "mat",
-];
 
 export function PopUpContextProvider({ children }) {
   const [rows, setRows] = React.useState(0);

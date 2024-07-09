@@ -11,6 +11,7 @@ import GameOverController from "../GameOverController";
 
 import Color from "color";
 import { useGameMode } from "../../context/game-mode-context";
+import { useCheatConsole } from "../../context/cheat-console";
 
 const Game = styled.div`
   width: 100vw;
@@ -57,6 +58,15 @@ const Pixel = React.memo(styled.div`
     props.$fill === 1 ? props.$color : "inherited"};
   position: relative;
   z-index: ${(props) => props.$zIndex};
+
+  ${(props) =>
+    props.$fill &&
+    props.$activeCheat &&
+    `
+    background-image: url(/assets/images/${props.$activeCheat}.png);
+    background-size: cover;
+    background-position: center;
+    `}
 
   ${(props) =>
     props.$paused &&
@@ -136,6 +146,7 @@ const Stage = ({
   const [theme3d, setTheme3d] = useState(false);
   const [nextRender, setNextRender] = useState();
   const stageRef = useRef(null);
+  const { activeCheat } = useCheatConsole();
 
   useEffect(() => {
     let pixelSizeHeight = height / 20;
@@ -208,6 +219,7 @@ const Stage = ({
                           $pixelSize={pixelSize}
                           key={`pixel-${x}`}
                           $fill={pixel}
+                          $activeCheat={activeCheat}
                           $color={player.next.color}
                         />
                       );
@@ -272,6 +284,7 @@ const Stage = ({
                           $color={playerFill ? player.bloco.color : pixel.color}
                           $playerColor={player.bloco.color}
                           $topBloco={topBloco}
+                          $activeCheat={activeCheat}
                           $zIndex={zIndex}
                         ></Pixel>
                       );

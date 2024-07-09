@@ -1,12 +1,3 @@
-import brooke from "../../images/brooke.png";
-import craig from "../../images/craig.png";
-import emma from "../../images/emma.png";
-import heber from "../../images/heber.png";
-import justin from "../../images/justin.png";
-import kels from "../../images/kels.png";
-import mars from "../../images/mars.png";
-import mat from "../../images/mat.png";
-
 import style from "./PopUps.module.css";
 
 import { useRef } from "react";
@@ -39,37 +30,31 @@ const useGetAthleteInfo = (athlete) => {
   let athleteImage;
   let athleteTagline;
 
+  athleteImage = `/assets/images/${athlete}.png`;
+
   switch (athlete) {
     case "brooke":
-      athleteImage = brooke;
       athleteTagline = "sweat now, shine later!";
       break;
     case "craig":
-      athleteImage = craig;
       athleteTagline = "we don't quit!";
       break;
     case "emma":
-      athleteImage = emma;
       athleteTagline = "train insane or remain the same!";
       break;
     case "heber":
-      athleteImage = heber;
       athleteTagline = "you gotta want it!";
       break;
     case "justin":
-      athleteImage = justin;
       athleteTagline = "my best is enough!";
       break;
     case "kels":
-      athleteImage = kels;
       athleteTagline = "just be a nice person!";
       break;
     case "mars":
-      athleteImage = mars;
       athleteTagline = "scale your life!";
       break;
     case "mat":
-      athleteImage = mat;
       athleteTagline = "hard work pays off!";
   }
 
