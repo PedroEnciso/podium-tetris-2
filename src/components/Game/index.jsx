@@ -485,9 +485,6 @@ const Game = () => {
           setDragX(mx);
         }
         if (Math.abs(my - dragY) > THRESHOLD) {
-          console.log("my", my);
-          console.log("dragy", dragY);
-          console.log("velocity", velocity);
           if (velocity > FORCE_THRESHOLD) {
             if (spaceReleased) {
               console.log("my", my);
