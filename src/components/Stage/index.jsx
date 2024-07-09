@@ -63,7 +63,7 @@ const Pixel = React.memo(styled.div`
     props.$fill &&
     props.$activeCheat &&
     `
-    background-image: url(/assets/images/${props.$activeCheat}.png);
+    background-image: url(https://playspace-static.s3.us-west-1.amazonaws.com/images/${props.$activeCheat}.png);
     background-size: cover;
     background-position: center;
     `}

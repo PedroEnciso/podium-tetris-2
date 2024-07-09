@@ -28,7 +28,7 @@ body {
   /* prevent overscroll bounce*/
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  background-image: url("/assets/images/tetris-background.png");
+  background-image: url("https://playspace-static.s3.us-west-1.amazonaws.com/images/tetris-background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -30,7 +30,7 @@ const useGetAthleteInfo = (athlete) => {
   let athleteImage;
   let athleteTagline;
 
-  athleteImage = `/assets/images/${athlete}.png`;
+  athleteImage = `https://playspace-static.s3.us-west-1.amazonaws.com/images/${athlete}.png`;
 
   switch (athlete) {
     case "brooke":
