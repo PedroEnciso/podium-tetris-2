@@ -171,7 +171,6 @@ const Game = () => {
   useEffect(() => {
     // update the popup with the change of lines
     const linesChange = lines - prevLinesRef.current;
-    console.log(`lines change is ${linesChange}`);
     if (linesChange > 1) {
       handlePopUpRows(linesChange);
     }
